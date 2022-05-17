@@ -19,9 +19,21 @@ h1 {
     margin-right: 100px;
 }
 
+.p-tagline-homepage{
+    color: black;
+    margin: 0;
+    text-align: center;
+}
+
+.p-price-homepage{
+    color: #525252;
+    margin: 0;
+}
+
 .logo {
     height: 50px;
     margin-left: 100px;
+    border-radius: 0;
 }
 
 .photographer_section {
@@ -37,14 +49,23 @@ h1 {
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    padding: 0;
 }
 
 .photographer_section article h2 {
     color: #D3573C;
     font-size: 36px;
+    margin-bottom: 0;
 }
+.photographer_section article h3 {
+    margin: 0;
+    color: #D3573C;
+}
+
 
 .photographer_section article img {
     height: 200px;
     width: 200px;
+    border-radius: 50%;
+    object-fit: cover;
 }
