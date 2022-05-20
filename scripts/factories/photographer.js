@@ -20,10 +20,12 @@ function photographerFactory(data) {
         a.href = URL;
     }
     links();
-
+    console.log(idNumbers);
+    console.log(data);
     function getUserCardDOM() {
 
-        a.href += "?id=" + idNumbers; 
+        const idUrl = a.href += "?id=" + idNumbers;
+        console.log(idUrl); 
         h2.textContent = name;       
         h3.textContent = (city + commaSpace + country); 
         pTagline.className = 'p-tagline-homepage';
@@ -42,3 +44,5 @@ function photographerFactory(data) {
     }
     return { name, picture, getUserCardDOM }
 }
+
+

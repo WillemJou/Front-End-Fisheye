@@ -84,10 +84,9 @@ a{
     color: #D3573C;    
 }
 .photographer_header img {
-    position: absolute;
-left: -81%;
-right: -82%;
-top: -25%;
-bottom: -54%;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
