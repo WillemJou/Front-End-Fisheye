@@ -63,25 +63,21 @@ a{
     object-fit: cover;
 }
 
-
-
 .photographer_header {
     display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    align-items: center;
+    background-color: #FAFAFA;
+}
+.photographer_header article {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
 
 }
-.photographer_header h1 {
-    position: absolute;
-    left: 0%;
-    right: 21.23%;
-    top: 0%;
-    bottom: 58.5%;
-    
-    font-family: 'DM Sans';
-    font-style: normal;
-    font-weight: 400;
-    font-size: 64px;
-    line-height: 83px;
-    color: #D3573C;    
+.photographer_header h2 {
+  color: #D3573C ;
 }
 .photographer_header img {
     height: 200px;
@@ -89,4 +85,12 @@ a{
     border-radius: 50%;
     object-fit: cover;
 }
+.photographer_header .p-price-homepage  {
+    display: none;
+}
+.descriptif-photographer{
+    display: flex;
+    flex-direction: column;
+}
+
 
