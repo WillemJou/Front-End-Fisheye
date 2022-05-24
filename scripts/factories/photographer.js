@@ -15,7 +15,7 @@ function photographerFactory(data) {
     const textPrice = "£/jours";
     const commaSpace = ", ";
     const idNumbers = id;
-    p =pTagline;
+    
     
     
     //liens homepage vers page photographe
@@ -28,6 +28,7 @@ function photographerFactory(data) {
     function getUserCardDOM() {
         
         const idUrl = a.href += "?id=" + idNumbers;
+        console.log(idUrl);
         h2.textContent = name;       
         h3.textContent = (city + commaSpace + country); 
         pTagline.className = 'p-tagline-homepage';
@@ -37,18 +38,35 @@ function photographerFactory(data) {
         pPrice.textContent = price + textPrice;
         img.setAttribute("src", picture)
         a.setAttribute("href", a)
-        a.appendChild(article); 
-        article.appendChild(img);
-        article.appendChild(h2);
-        article.appendChild(h3);
-        article.appendChild(pTagline);
-        article.appendChild(pPrice);
-        article.appendChild(descriptifPhotographer);
-        descriptifPhotographer.append(h2, h3, p);
-        return (a);
+        article.appendChild(a); 
+        a.appendChild(img);
+        a.appendChild(h2);
+        a.appendChild(h3);
+        a.appendChild(pTagline);
+        a.appendChild(pPrice);
+        a.appendChild(descriptifPhotographer);
+        descriptifPhotographer.append(h2, h3, pTagline, pPrice);
+        return article;
     }
-
     return { name, picture, getUserCardDOM}
+}
+
+function mediaFactory(dataMedia){
+
+    const { id, photographerId, title, image, video, likes, date, price } = dataMedia;
+
+    const picture = 'assets/Sample Photos/${image, video}';
+    const titlePhoto = document.createElement("h3");
+    const layoutPhoto = document.createElement("article");
+    const img = document.createElement("img");
+
+    function getPhotoCardDOM() {
+        titlePhoto.textContent = title;
+        img.setAttribute("src", picture);
+        layoutDescriptifPhoto.append(titlePhoto, img);
+        return layoutPhoto;
+    }
+    return { picture, getPhotoCardDOM}
 }
 
 
