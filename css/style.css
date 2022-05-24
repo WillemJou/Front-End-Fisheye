@@ -110,7 +110,12 @@ a{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 70px;
-
+    margin: 0 100px;
+}
+.photographies img {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
 }
 
 

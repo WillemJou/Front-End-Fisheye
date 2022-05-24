@@ -14,7 +14,7 @@ function photographerFactory(data) {
     const a = document.createElement('a');
     const textPrice = "£/jours";
     const commaSpace = ", ";
-    const idNumbers = id;
+    const idPhotographers = id;
     
     
     
@@ -27,7 +27,7 @@ function photographerFactory(data) {
     
     function getUserCardDOM() {
         
-        const idUrl = a.href += "?id=" + idNumbers;
+        const idUrl = a.href += "?id=" + idPhotographers;
         console.log(idUrl);
         h2.textContent = name;       
         h3.textContent = (city + commaSpace + country); 
@@ -55,15 +55,21 @@ function mediaFactory(dataMedia){
 
     const { id, photographerId, title, image, video, likes, date, price } = dataMedia;
 
-    const picture = 'assets/Sample Photos/${image, video}';
+    const picture = `assets/Sample_Photos/Tracy/${image}`;
     const titlePhoto = document.createElement("h3");
     const layoutPhoto = document.createElement("article");
     const img = document.createElement("img");
+    const idPhotographies = id;
+    const idPhotographer = photographerId;
+    const like = likes;
+    const dates = date;
+    const prices = price;
+
 
     function getPhotoCardDOM() {
         titlePhoto.textContent = title;
         img.setAttribute("src", picture);
-        layoutDescriptifPhoto.append(titlePhoto, img);
+        layoutPhoto.append(titlePhoto, img);
         return layoutPhoto;
     }
     return { picture, getPhotoCardDOM}
