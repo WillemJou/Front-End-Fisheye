@@ -1,69 +1,47 @@
 const localUrl = '../../data/photographers.json';
 
-
-
 async function getPhotographers() {
     const res = await fetch(localUrl);
-    const data = await res.json()
-    return ({data}) 
-}
-async function getPhotographies() {
-    const res = await fetch(localUrl);
-    const dataMedia = await res.json()
-    return ({dataMedia}) 
+    const datas = await res.json()
+    return datas; 
 }
 
-function displayDataPhoto(photographers) {
+function displayDataPhoto(photographers, medias) {
     const photographersHeader = document.querySelector(".photographer_header");
+    const photographiesSection = document.querySelector(".photographies");
 
     // récupération parametre id de l'URL
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
-    const UrlIdParams = urlParams.get ('id');
-    console.log(UrlIdParams);
+    const urlIdParams = urlParams.get ('id');
 
     // Récupère les datas du photographe selon son ID 
-    const findId = () =>{
-        photographers.find( id => id === UrlIdParams);
+    const findPhotographer = () => {
+        const findPhotographer = photographers.find( item => item.id === Number(urlIdParams));
+        return findPhotographer;
     }
-    console.log(findId());
-
-    // afficher contenu en fonction de l'Id de l'url 
-   UrlIdParams === photographers.id ? true : photographers.style.display = "none"; 
+    const photographerModel = photographerFactory(findPhotographer());
+    const userCardDOM = photographerModel.getUserCardDOM();
+    photographersHeader.appendChild(userCardDOM);
 
     
-    photographers.forEach((photographer) => {
-        
-        const photographerModel = photographerFactory(photographer); 
-        const userCardDOM = photographerModel.getUserCardDOM();
-        photographersHeader.appendChild(userCardDOM);
-        
+    const findMedias = () => {
+        const findMedia = medias.filter( medias => medias.id === Number(urlIdParams));
+        return findMedia;
+    }
+    medias.forEach(() => {
+        const photographyModel = mediaFactory(findMedias()); 
+        const userPhotoCardDOM = photographyModel.getPhotoCardDOM();
+        photographiesSection.appendChild(userPhotoCardDOM);
     });
 };
 async function init() {
-    // Récupère les datas des photographes  
-    const { data } = await getPhotographers();
-    displayDataPhoto(data.photographers); 
+    // Récupère les datas  
+    const datas = await getPhotographers();
+    const photographers = datas.photographers;
+    const medias = datas.medias;
+    displayDataPhoto(photographers, medias); 
 };
 init();
-
-function displayDataPhotography(media) {
-    const photographiesSection = document.querySelector(".photographies");
-    
-    media.forEach((media) => {
-        
-        const photographyModel = mediaFactory(media); 
-        const userPhotoCardDOM = photographyModel.getPhotoCardDOM();
-        photographiesSection.appendChild(userPhotoCardDOM);
-
-    });
-};
-    async function initPhoto() {
-        // Récupère les datas des photographies  
-        const { dataMedia } = await getPhotographies();
-        displayDataPhotography(dataMedia.media);  
-    };
-    initPhoto();
-
 
 

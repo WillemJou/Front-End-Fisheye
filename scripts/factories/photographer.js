@@ -27,8 +27,7 @@ function photographerFactory(data) {
     
     function getUserCardDOM() {
         
-        const idUrl = a.href += "?id=" + idPhotographers;
-        console.log(idUrl);
+        a.href += "?id=" + idPhotographers;
         h2.textContent = name;       
         h3.textContent = (city + commaSpace + country); 
         pTagline.className = 'p-tagline-homepage';
@@ -51,11 +50,11 @@ function photographerFactory(data) {
     return { name, picture, getUserCardDOM}
 }
 
-function mediaFactory(dataMedia){
+function mediaFactory(data){
 
-    const { id, photographerId, title, image, video, likes, date, price } = dataMedia;
+    const { id, photographerId, title, image, video, likes, date, price } = data;
 
-    const picture = `assets/Sample_Photos/Tracy/${image}`;
+    const picture = `assets/Sample Photos/${image}`;
     const titlePhoto = document.createElement("h3");
     const layoutPhoto = document.createElement("article");
     const img = document.createElement("img");
@@ -74,8 +73,3 @@ function mediaFactory(dataMedia){
     }
     return { picture, getPhotoCardDOM}
 }
-
-
-
-
-
