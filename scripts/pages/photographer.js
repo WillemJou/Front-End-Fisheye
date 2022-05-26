@@ -14,7 +14,7 @@ function displayDataPhoto(photographers, medias) {
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const urlIdParams = urlParams.get ('id');
-
+    
     // Récupère les datas du photographe selon son ID 
     const findPhotographer = () => {
         const findPhotographer = photographers.find( item => item.id === Number(urlIdParams));
@@ -26,14 +26,18 @@ function displayDataPhoto(photographers, medias) {
 
     
     const findMedias = () => {
-        const findMedia = medias.filter( medias => medias.id === Number(urlIdParams));
-        return findMedia;
+        const filterMedia = medias.filter( media => media.photographerId === Number(urlIdParams));
+       return filterMedia;
     }
-    medias.forEach(() => {
-        const photographyModel = mediaFactory(findMedias()); 
-        const userPhotoCardDOM = photographyModel.getPhotoCardDOM();
-        photographiesSection.appendChild(userPhotoCardDOM);
-    });
+    
+    findMedias().forEach((medias) => {
+    
+    const photographyModel = mediaFactory(medias); 
+    const userPhotoCardDOM = photographyModel.getPhotoCardDOM();
+    photographiesSection.appendChild(userPhotoCardDOM);
+});
+
+
 };
 async function init() {
     // Récupère les datas  

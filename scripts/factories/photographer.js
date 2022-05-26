@@ -1,7 +1,7 @@
 function photographerFactory(data) {
     
     const { name, portrait, city, country, tagline, price, id} = data;
-    
+
     const picture = `assets/photographers/${portrait}`;
     const descriptifPhotographer =  document.createElement('div');
     const article = document.createElement( 'article' );
@@ -50,26 +50,35 @@ function photographerFactory(data) {
     return { name, picture, getUserCardDOM}
 }
 
-function mediaFactory(data){
+function mediaFactory(data) {
 
-    const { id, photographerId, title, image, video, likes, date, price } = data;
-
+    const { id, photographerId, title, image, video, likes, date, price} = data;
     const picture = `assets/Sample Photos/${image}`;
+    const short = `assets/Sample Photos/${video}`;
+  
     const titlePhoto = document.createElement("h3");
     const layoutPhoto = document.createElement("article");
     const img = document.createElement("img");
-    const idPhotographies = id;
+    const videos = document.createElement("video");
     const idPhotographer = photographerId;
     const like = likes;
     const dates = date;
     const prices = price;
 
-
+    
     function getPhotoCardDOM() {
         titlePhoto.textContent = title;
         img.setAttribute("src", picture);
-        layoutPhoto.append(titlePhoto, img);
-        return layoutPhoto;
+        videos.setAttribute("src", short);
+        layoutPhoto.append(titlePhoto, img || videos);
+
+            // afficher vidéos si pas d'image
+            //const videoOrImg = (img) => {
+              //  img == undefined ? document.createElement("video") : false ;
+                //console.log(videoOrImg());
+            //}
+
+        return (layoutPhoto);
     }
-    return { picture, getPhotoCardDOM}
+    return { id, picture, getPhotoCardDOM }
 }
