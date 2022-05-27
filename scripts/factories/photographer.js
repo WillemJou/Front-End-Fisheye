@@ -7,15 +7,18 @@ function photographerFactory(data) {
     const article = document.createElement( 'article' );
     const img = document.createElement( 'img' );
     const pTagline = document.createElement('p');
-    const pPrice = document.createElement('p');
     const h2 = document.createElement( 'h2' );
     const h3 = document.createElement( 'h3' );
     const URL = "photographer.html";
     const a = document.createElement('a');
-    const textPrice = "£/jours";
+    const pPrice = document.createElement('p');
+    const textPrice = "£/jour";
     const commaSpace = ", ";
     const idPhotographers = id;
-    
+
+    const blackHeartPng = `assets/images/heart-black.png`;
+    const stickyCard =  document.getElementById('sticky_card');
+    const blackHeart = document.createElement("img");
     
     
     //liens homepage vers page photographe
@@ -23,7 +26,6 @@ function photographerFactory(data) {
         a.href = URL;
     }
     links();
-    
     
     function getUserCardDOM() {
         
@@ -45,40 +47,54 @@ function photographerFactory(data) {
         a.appendChild(pPrice);
         a.appendChild(descriptifPhotographer);
         descriptifPhotographer.append(h2, h3, pTagline, pPrice);
+        blackHeart.setAttribute("src", blackHeartPng);
+        blackHeart.className = 'heart-black';
+        stickyCard.append(blackHeart, pPrice );
         return article;
     }
     return { name, picture, getUserCardDOM}
 }
 
 function mediaFactory(data) {
-
+    
     const { id, photographerId, title, image, video, likes, date, price} = data;
     const picture = `assets/Sample Photos/${image}`;
     const short = `assets/Sample Photos/${video}`;
-  
+    const heartPng = `assets/images/heart-solid.png`;
     const titlePhoto = document.createElement("h3");
     const layoutPhoto = document.createElement("article");
     const img = document.createElement("img");
     const videos = document.createElement("video");
+    const layoutCard = document.createElement("div");
+    const heart = document.createElement("img");
     const idPhotographer = photographerId;
     const like = likes;
     const dates = date;
     const prices = price;
-
+    
     
     function getPhotoCardDOM() {
         titlePhoto.textContent = title;
+        heart.className = 'heart';
+        layoutCard.className = 'layout_card';
         img.setAttribute("src", picture);
+        heart.setAttribute("src", heartPng);
         videos.setAttribute("src", short);
-        layoutPhoto.append(titlePhoto, img || videos);
-
-            // afficher vidéos si pas d'image
-            //const videoOrImg = (img) => {
-              //  img == undefined ? document.createElement("video") : false ;
-                //console.log(videoOrImg());
+        layoutPhoto.append(layoutCard, img || videos);
+        layoutCard.append(titlePhoto, like, heart);
+        
+        
+        // afficher vidéos si pas d'image
+        //const videoOrImg = (img) => {
+            //  img == undefined ? document.createElement("video") : false ;
+            //console.log(videoOrImg());
             //}
-
-        return (layoutPhoto);
+            
+            return (layoutPhoto);
+        }
+        return { id, picture, getPhotoCardDOM }
     }
-    return { id, picture, getPhotoCardDOM }
-}
+    
+    
+
+    

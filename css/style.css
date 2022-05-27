@@ -24,7 +24,7 @@ a{
     text-align: center;
 }
 .p-price-homepage{
-    color: #525252;
+    color: #757575;
     margin: 0;
 }
 
@@ -55,7 +55,7 @@ a{
 }
 .photographer_section article h3 {
     margin: 0;
-    color: #D3573C;
+    color: #901C1C;
 }
 .photographer_section a img {
     height: 200px;
@@ -67,8 +67,10 @@ a{
     display: flex;
     text-align: center;
     flex-direction: column;
+}.photographer_section .sticky-card{
+    display: none;
+    background-color: #DB8876;
 }
-
 .photographer_header {
     position: relative;
     display: flex;
@@ -96,6 +98,9 @@ a{
 .photographer_header h2 {
   color: #D3573C ;
 }
+.photographer_header h3 {
+  color: #901C1C;
+}
 .photographer_header img { 
     height: 200px;
     width: 200px;
@@ -110,18 +115,59 @@ a{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 70px;
-    margin: 0 100px;
+    margin: 100px 100px;
+}
+
+.photographies article {
+    display: flex;
+    flex-direction: column-reverse;
 }
 .photographies img {
-    height: 200px;
-    width: 200px;
+    height: 100%;
+    width: 100%;
     object-fit: cover;
 }
 .photographies video {
-    height: 200px;
-    width: 200px;
+    height: 100%;
+    width: 100%;
     object-fit: cover;
 }
+.photographies h3 {
+   color:#901C1C;
+
+}
+.layout_card{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.photographies .heart{
+   width: 20px;
+   height: 20px;
+}
+.heart-black{
+   width: 20px;
+   height: 20px;
+}
+
+.sticky-card{
+    display: flex;
+    position: sticky;
+    width: 376px;
+    height: 89px;
+    left: 54%;
+    right: -121.18%;
+    top: 18.84%;
+    bottom: -47.83%;
+    background-color: #DB8876;
+    border-radius: 5px;
+}
+.sticky-card .p-price-homepage{
+    color: black;
+}
+
+
+
 
 
 
