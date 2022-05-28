@@ -71,6 +71,16 @@ function mediaFactory(data) {
     const like = likes;
     const dates = date;
     const prices = price;
+
+    // rendre objet en tableau
+    const value = Object.values(data);
+    console.log(value);
+    // Calcul de la somme des likes (retourne Nan)
+    const getSumByKey = (value, likes) => {
+        return value.reduce((acc, curr) => acc + Number(curr[likes]), 0)
+    }
+    const total = getSumByKey(value, "likes");
+    console.log(total);
     
     
     function getPhotoCardDOM() {
@@ -82,7 +92,8 @@ function mediaFactory(data) {
         videos.setAttribute("src", short);
         layoutPhoto.append(layoutCard, img || videos);
         layoutCard.append(titlePhoto, like, heart);
-        
+      
+
         
         // afficher vidéos si pas d'image
         //const videoOrImg = (img) => {

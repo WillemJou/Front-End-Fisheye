@@ -153,12 +153,11 @@ a{
 .sticky-card{
     display: flex;
     position: sticky;
-    width: 376px;
-    height: 89px;
-    left: 54%;
-    right: -121.18%;
-    top: 18.84%;
-    bottom: -47.83%;
+    padding: 10px;
+    width: 200px;
+    height: 29px;
+    left: 83%;
+    bottom: 0;
     background-color: #DB8876;
     border-radius: 5px;
 }
