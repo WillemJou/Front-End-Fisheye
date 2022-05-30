@@ -61,6 +61,11 @@ function mediaFactory(data) {
     const picture = `assets/Sample Photos/${image}`;
     const short = `assets/Sample Photos/${video}`;
     const heartPng = `assets/images/heart-solid.png`;
+    const divFilter = document.getElementById("filter_categories");
+    const popFilter = document.getElementsByClassName("pop");
+    const dateFilter = document.getElementsByClassName("date");
+    const titleFilter = document.getElementsByClassName("title");
+    const chevron = document.getElementsByClassName("chevron");
     const titlePhoto = document.createElement("h3");
     const layoutPhoto = document.createElement("article");
     const img = document.createElement("img");
@@ -73,11 +78,13 @@ function mediaFactory(data) {
     const prices = price;
 
     // rendre objet en tableau
-    const value = Object.values(data);
-    console.log(value);
-    // Calcul de la somme des likes (retourne Nan)
+    const value = Object.values(like);
+    console.log(data.price);
+
+    
+    // Calcul de la somme des likes (retourne Nan ou 0)
     const getSumByKey = (value, likes) => {
-        return value.reduce((acc, curr) => acc + Number(curr[likes]), 0)
+        return value.reduce((acc, curr) => acc + Number(curr[likes]), 0);
     }
     const total = getSumByKey(value, "likes");
     console.log(total);
@@ -87,6 +94,18 @@ function mediaFactory(data) {
         titlePhoto.textContent = title;
         heart.className = 'heart';
         layoutCard.className = 'layout_card';
+
+        const changeChevronEvent = () => {
+            const changeChevron = () => { chevron.setAttribute("src", "assets/images/chevron-up-solid.png");
+            filter.addEventListener("mouseover", changeChevron());
+        }
+    }
+    console.log(changeChevronEvent());
+    
+    //popFilter.addEventListener("click", );
+    
+
+
         img.setAttribute("src", picture);
         heart.setAttribute("src", heartPng);
         videos.setAttribute("src", short);

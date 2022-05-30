@@ -110,12 +110,44 @@ a{
 .photographer_header .p-price-homepage  {
     display: none;
 }
-
+.filters{
+    display: flex;
+    position: relative;
+    margin: 30px 0  0 100px;
+    font-weight: bold;
+}
+.filter-categories{
+    background-color: #901C1C;
+    margin-left: 20px;
+    margin-top: -20px;
+    border-radius: 5px;
+    padding: 0 15px 10px 10px;
+    font-weight: normal;
+    color: #FAFAFA;
+    max-height:37px;
+    overflow: hidden;
+    transition: 1s max-height 0.3s;
+}
+.pop, .date{
+    padding: 15px 0 10px 15px;
+    border-bottom: 1px solid #FAFAFA;
+}
+.filter-categories:hover {
+    max-height: 137px;
+}
+.title{
+    padding: 15px 0 10px 15px;
+}
+.chevron{
+    width: 15px;
+    height: 15px;
+    padding: 0 30px;
+}
 .photographies {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 70px;
-    margin: 100px 100px;
+    margin: 50px 100px;
 }
 
 .photographies article {
