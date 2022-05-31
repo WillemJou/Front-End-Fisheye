@@ -15,11 +15,16 @@ function photographerFactory(data) {
     const textPrice = "£/jour";
     const commaSpace = ", ";
     const idPhotographers = id;
-
+    
+    
+    const sticky = () => {
     const blackHeartPng = `assets/images/heart-black.png`;
     const stickyCard =  document.getElementById('sticky_card');
     const blackHeart = document.createElement("img");
-    
+    blackHeart.setAttribute("src", blackHeartPng);
+    blackHeart.className = 'heart-black';
+    stickyCard.append(pPrice, blackHeart);
+    }
     
     //liens homepage vers page photographe
     const links = () =>{
@@ -47,9 +52,9 @@ function photographerFactory(data) {
         a.appendChild(pPrice);
         a.appendChild(descriptifPhotographer);
         descriptifPhotographer.append(h2, h3, pTagline, pPrice);
-        blackHeart.setAttribute("src", blackHeartPng);
-        blackHeart.className = 'heart-black';
-        stickyCard.append(blackHeart, pPrice );
+        
+        sticky();
+        
         return article;
     }
     return { name, picture, getUserCardDOM}
@@ -61,64 +66,35 @@ function mediaFactory(data) {
     const picture = `assets/Sample Photos/${image}`;
     const short = `assets/Sample Photos/${video}`;
     const heartPng = `assets/images/heart-solid.png`;
-    const divFilter = document.getElementById("filter_categories");
-    const popFilter = document.getElementsByClassName("pop");
-    const dateFilter = document.getElementsByClassName("date");
-    const titleFilter = document.getElementsByClassName("title");
-    const chevron = document.getElementsByClassName("chevron");
     const titlePhoto = document.createElement("h3");
     const layoutPhoto = document.createElement("article");
+    const layoutVideo = document.createElement("article");
     const img = document.createElement("img");
     const videos = document.createElement("video");
     const layoutCard = document.createElement("div");
     const heart = document.createElement("img");
-    const idPhotographer = photographerId;
     const like = likes;
     const dates = date;
-    const prices = price;
 
-    // rendre objet en tableau
-    const value = Object.values(like);
-    console.log(data.price);
-
-    
-    // Calcul de la somme des likes (retourne Nan ou 0)
-    const getSumByKey = (value, likes) => {
-        return value.reduce((acc, curr) => acc + Number(curr[likes]), 0);
-    }
-    const total = getSumByKey(value, "likes");
-    console.log(total);
-    
     
     function getPhotoCardDOM() {
         titlePhoto.textContent = title;
         heart.className = 'heart';
         layoutCard.className = 'layout_card';
-
-        const changeChevronEvent = () => {
-            const changeChevron = () => { chevron.setAttribute("src", "assets/images/chevron-up-solid.png");
-            filter.addEventListener("mouseover", changeChevron());
-        }
-    }
-    console.log(changeChevronEvent());
-    
-    //popFilter.addEventListener("click", );
-    
-
-
         img.setAttribute("src", picture);
         heart.setAttribute("src", heartPng);
         videos.setAttribute("src", short);
-        layoutPhoto.append(layoutCard, img || videos);
         layoutCard.append(titlePhoto, like, heart);
+        layoutPhoto.append(layoutCard, img);
+        layoutVideo.append(videos);
       
 
         
         // afficher vidéos si pas d'image
-        //const videoOrImg = (img) => {
-            //  img == undefined ? document.createElement("video") : false ;
-            //console.log(videoOrImg());
-            //}
+        const videoOrImg = (img) => {
+            img == undefined ? layoutPhoto.style.display ="none" && (layoutVideo.style.display ="block"): false ;
+            console.log(videoOrImg());
+            }
             
             return (layoutPhoto);
         }

@@ -180,13 +180,15 @@ a{
 .heart-black{
    width: 20px;
    height: 20px;
+   padding: 0 10px;
 }
 
 .sticky-card{
     display: flex;
+    flex-direction: row-reverse;
     position: sticky;
     padding: 10px;
-    width: 200px;
+    width: 178px;
     height: 29px;
     left: 83%;
     bottom: 0;
@@ -195,6 +197,7 @@ a{
 }
 .sticky-card .p-price-homepage{
     color: black;
+    padding: 0 9px;
 }
 
 
