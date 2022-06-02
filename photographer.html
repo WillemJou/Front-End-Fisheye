@@ -8,12 +8,41 @@
     <title>Fisheye - photographe </title>
   </head>
   <body>
-    <header>
+    <div id="contact_modal" aria-hidden="true" role="dialog" aria-describedby="Contact">
+      <div class="modal">
+        <header>
+          <div class="title-modal_layout">
+          <h2 id="title_modal">Contactez-moi <br> </h2>
+          <img src="assets/icons/close.svg" onclick="closeModal()" />
+        </div>
+        </header>
+        <form id="modal_form" method="get">
+          <div>
+            <label>Prénom</label>
+            <input type="text" required minlength="2" />
+          </div>
+          <div>
+            <label>Nom</label>
+            <input type="text" required minlength="2" />
+          </div>
+          <div>
+            <label>Email</label>
+            <input type="email" required />
+          </div>
+          <div>
+            <label>Votre message</label>
+            <input class="message-input" />
+          </div>
+          <button id="send_button" class="contact_button">Envoyer</button>
+        </form>
+      </div>
+    </div>
+    <header class="header-page">
      <a href="index.html"><img src="assets/images/logo.png" alt="Fish Eye Home page" class="logo" /></a>
     </header>
-    <main id="main">
+    <main id="main" aria-hidden="false">
       <div class="photographer_header">
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <button id="open_modal_button" class="contact_button" onclick="displayModal()">Contactez-moi</button>
       </div>
       <section id="filter" class="filters">Trier par
         <div id="filter_categories" class="filter-categories">
@@ -33,21 +62,6 @@
       <aside class="sticky-card" id="sticky_card" >
       </aside>
     </main>
-    <div id="contact_modal">
-			<div class="modal">
-				<header>
-          <h2>Contactez-moi</h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
-        </header>
-				<form>
-					<div>
-						<label>Prénom</label>
-						<input />
-					</div>
-          <button class="contact_button">Envoyer</button>
-				</form>
-			</div>
-		</div>
    
     <script src="scripts/factories/photographer.js"></script>
     <script src="scripts/pages/photographer.js"></script>

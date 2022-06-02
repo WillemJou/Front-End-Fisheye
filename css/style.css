@@ -4,7 +4,7 @@ body {
     font-family: "DM Sans", sans-serif;
     margin: 0;
 }
-header {
+.header-page {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -24,8 +24,12 @@ a{
     text-align: center;
 }
 .p-price-homepage{
+    display: block;
     color: #757575;
     margin: 0;
+}
+.photographer_section .p-price-homepage{
+    display: block;
 }
 
 .logo {
@@ -67,12 +71,11 @@ a{
     display: flex;
     text-align: center;
     flex-direction: column;
-}.photographer_section .sticky-card{
+}
+.photographer_section .sticky-card{
     display: none;
-    background-color: #DB8876;
 }
 .photographer_header {
-    position: relative;
     display: flex;
     align-items: center;
     background-color: #FAFAFA;
@@ -86,10 +89,14 @@ a{
     pointer-events: none;
 
 }
-.contact_button{
+#title_modal{
+    margin-top: 0;
+    
+}
+#open_modal_button{
     position: absolute;
-    top: 31%;
-    left: 38%;
+    top: 13%;
+    left: 50%;
   
 }
 .photographer_header article {
@@ -112,7 +119,6 @@ a{
 }
 .filters{
     display: flex;
-    position: relative;
     margin: 30px 0  0 100px;
     font-weight: bold;
 }
@@ -179,15 +185,15 @@ a{
 }
 .heart-black{
    width: 20px;
-   height: 20px;
-   padding: 0 10px;
+   height: 20px;   
+   padding: 0px 17px 13px 6px;
 }
-
 .sticky-card{
     display: flex;
     flex-direction: row-reverse;
     position: sticky;
-    padding: 10px;
+    z-index: 1;
+    padding : 13px 25px 3px 0px;
     width: 178px;
     height: 29px;
     left: 83%;

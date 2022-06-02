@@ -4,10 +4,11 @@ async function getPhotographers() {
     const res = await fetch(localUrl);
     const datas = await res.json()
     return datas; 
-}
+};
 const biggestToLowest = (a, b) =>{
     return b - a
-} 
+};
+
 
 function displayDataPhoto(photographers, medias) {
     const photographersHeader = document.querySelector(".photographer_header");
@@ -22,57 +23,69 @@ function displayDataPhoto(photographers, medias) {
     const findPhotographer = () => {
         const findPhotographer = photographers.find( item => item.id === Number(urlIdParams));
         return findPhotographer;
-    }
+    };
+
     const findMedias =  medias.filter( media => media.photographerId === Number(urlIdParams));
     const photographerModel = photographerFactory(findPhotographer());
     const userCardDOM = photographerModel.getUserCardDOM();
     photographersHeader.appendChild(userCardDOM);
     
+    // afficher nom dans modal
+    const titleModal = document.getElementById("title_modal");
+    const findName =  findPhotographer().name;
+    titleModal.append(findName);
+
     const changeChevronEvent = () => {
         const chevron = document.getElementsByClassName("chevron");
         const changeChevron = () => { chevron.setAttribute("src", "assets/images/chevron-up-solid.png");
         filter_categories.addEventListener("mouseover", changeChevron());
-        }
-    }   
+        };
+    }; 
 
 
 
     //fonction somme des likes 
     const likeSum = () => {
-    const likes = findMedias.map(item => (item.likes));
-    const reducer = (acc, curr) => acc + curr;
-    const sum = likes.reduce(reducer);
-    const stickyCard = document.getElementById('sticky_card');
-    stickyCard.append(sum);
-   
+        const likes = findMedias.map(item => (item.likes));
+        const reducer = (acc, curr) => acc + curr;
+        const sum = likes.reduce(reducer);
+        const stickyCard = document.getElementById('sticky_card');
+        stickyCard.append(sum);
+        return (sum);
+    };
+    likeSum();
+    
     // tableau like du + au -
     const biggestToLowestLikesArray = () =>{ 
         const filterLikes = likes.sort(biggestToLowest);
         return filterLikes;
     }    
-
-    // event filtre pop
+    // filtre selon like (plus pop)
     const popFilter = () => {
         const pop = document.getElementsByClassName("pop");
         const popEvent = () =>{
-            pop.addEventListener("click", biggestToLowestLikesArray());
+            pop.addEventListener("click", biggestToLowestLikesArray);
             return popEvent();
-            }   
-        }
-    return sum;
+        };   
+    return popFilter();
+    };
+
+    // incrémenter like +1
+    const incrementsLike = () => {
+        const layoutPhoto = document.getElementsByClassName("layout-photo");
+        let likes = findMedias.map(item => (item.likes));
+       // console.log(likes);
+        likes.forEach(() => {
+            let likesPlus1 = ++likes;
+           // console.log(likesPlus1);
+        });
     }
-    likeSum();
-
-
-
-    
-   
-
-   
-    findMedias.forEach((medias) => {
-    const photographyModel = mediaFactory(medias); 
-    const userPhotoCardDOM = photographyModel.getPhotoCardDOM();
-    photographiesSection.appendChild(userPhotoCardDOM);
+//console.log(incrementsLike());
+ 
+    findMedias.forEach((media) => {
+        const mediaModel = mediaFactory(media); 
+        const userMediaCardDOM = mediaModel.generateMediaElement(media);
+        photographiesSection.append(userMediaCardDOM);
     });
 };
 
@@ -84,5 +97,7 @@ async function init() {
     displayDataPhoto(photographers, medias); 
 };
 init();
+
+
 
 

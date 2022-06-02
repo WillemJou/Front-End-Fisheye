@@ -1,13 +1,26 @@
 #contact_modal {
     display: none;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: 100%;
 }
 
-.photograph-header {
-    background-color: #FAFAFA;
-    height: 300px;
-    margin: 0 100px;
-}
+.modal {
+    width: 50%;
+    display:  flex;
+    z-index: 1;
+    height: 85%;
+    border-radius: 5px;
+    background-color: #DB8876;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 35px;
+    margin: auto;
 
+}
 .contact_button {
     font-size: 20px;
     font-weight: bold;
@@ -20,17 +33,12 @@
     border-radius: 5px;
     cursor: pointer;
 }
-
-.modal {
-    border-radius: 5px;
-    background-color: #DB8876;
-    width: 50%;
+.title-modal_layout{
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    padding: 35px;
     margin: auto;
+    justify-content: flex-start;
+    align-items: baseline;
+    justify-content: space-between;
 }
 
 .modal header {
@@ -39,13 +47,14 @@
 }
 
 .modal header img {
+    display: flex;
     cursor: pointer;
 }
 
 .modal header h2 {
+    display: flex;
     font-size: 64px;
     font-weight: normal;
-    text-align: center;
 }
 
 form {
@@ -73,4 +82,8 @@ form input {
     height: 68px;
     border: none;
     border-radius: 5px;
+    font-size: 33px;
+}
+.message-input {
+    height: 150px;
 }
