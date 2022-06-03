@@ -87,3 +87,54 @@ form input {
 .message-input {
     height: 150px;
 }
+
+.lightbox__container{
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+}
+
+.lightbox {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.next-chevron, .prev-chevron, .lightbox__close-img{
+    width: 30px;
+    height:  30px;
+    border: none;
+}
+
+.lightbox__close, .lightbox__previous, .lightbox__next {
+    display: flex;
+    position: fixed;
+    width: 50px;
+    height: 80%;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+    align-items: center;
+    background-color:transparent;
+    border: none;
+
+}
+.lightbox__previous{
+    right: auto ;
+}
+.lightbox__close{
+   top: 0;
+   height: 10%;
+}
+
+
+
+

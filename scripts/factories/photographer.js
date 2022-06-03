@@ -67,6 +67,7 @@ function mediaFactory(data) {
     const layoutPhoto = document.createElement("article");
     layoutPhoto.className = 'layout-photo';
     const layoutVideo = document.createElement("article");
+    layoutVideo.className = 'layout-video';
     const img = document.createElement("img");
     const videos = document.createElement("video");
     const layoutCard = document.createElement("div");
