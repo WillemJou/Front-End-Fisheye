@@ -34,6 +34,7 @@ function photographerFactory(data) {
         descriptifPhotographer.className = 'descriptif-photographer';
         pPrice.textContent = price + textPrice;
         img.setAttribute("src", picture)
+        img.setAttribute("alt", name);
         a.setAttribute("href", a)
         article.appendChild(a); 
         a.appendChild(img);
@@ -69,35 +70,36 @@ function mediaFactory(data) {
     const layoutVideo = document.createElement("article");
     layoutVideo.className = 'layout-video';
     const img = document.createElement("img");
+    img.className = 'photos';
+    img.setAttribute("alt", title);
     const videos = document.createElement("video");
     const layoutCard = document.createElement("div");
     const heart = document.createElement("img");
-    const like = likes;
+    const likeContainer = document.createElement("div");
+    likeContainer.append(likes, heart);
+    likeContainer.className ='like-container';
     const dates = date;
     titlePhoto.textContent = title;
     heart.className = 'heart';
     heart.setAttribute("src", heartPng);
     layoutCard.className = 'layout_card';
-    layoutCard.append(titlePhoto, like, heart);
+    layoutCard.append(titlePhoto, likeContainer);
 
     function generateMediaElement() {
         
-        const getPictureCardDOM = () => {
+        const getPictureCardDom =() => {
             img.setAttribute("src", picture);
             layoutPhoto.append(layoutCard, img);
             return layoutPhoto;
         };
-
+        
         const getVideoCardDom = () => {
             videos.setAttribute("src", short);
             layoutVideo.append(layoutCard, videos);
             return layoutVideo;
         };
-        return (getVideoCardDom(),(getPictureCardDOM()));
+        
+        return getPictureCardDom();
     };
-    return { id, picture, generateMediaElement};
+return { id, picture, generateMediaElement};
 };
-    
-    
-
-    

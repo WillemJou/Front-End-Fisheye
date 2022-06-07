@@ -156,6 +156,11 @@ a{
     margin: 50px 100px;
 }
 
+.like-container{
+    display:flex;
+    gap: 5px;
+}
+
 .photographies article {
     display: flex;
     flex-direction: column-reverse;

@@ -19,15 +19,15 @@
         <form id="modal_form" method="get">
           <div>
             <label>Prénom</label>
-            <input type="text" required minlength="2" />
+            <input id="firstname" type="text" required minlength="2" />
           </div>
           <div>
             <label>Nom</label>
-            <input type="text" required minlength="2" />
+            <input id="lastname" type="text" required minlength="2" />
           </div>
           <div>
             <label>Email</label>
-            <input type="email" required />
+            <input id="email" type="email" required />
           </div>
           <div>
             <label>Votre message</label>
@@ -59,11 +59,10 @@
       </section>
       <section class="photographies">
       </section>
-      <aside class="sticky-card" id="sticky_card" >
+      <aside class="sticky-card" id="sticky_card">
       </aside>
     </main>
-    <div class="lightbox__container">
-    <article class="lightbox">
+    <article class="lightbox" id="lb_container" aria-hidden="true" role="dialog" aria-describedby="LightBox" >
         <button class="lightbox__previous">
           <img class="prev-chevron" src="assets/images/chevron-prev.png" alt=""></button>
         <button class="lightbox__next">
@@ -71,10 +70,10 @@
         <button class="lightbox__close">
           <img class="lightbox__close-img" src="assets/images/close.png"></button>
         </article>
-     </div>
    
     <script src="scripts/factories/photographer.js"></script>
     <script src="scripts/pages/photographer.js"></script>
     <script src="scripts/utils/contactForm.js"></script>
+    <script src="scripts/utils/lightbox.js"></script>
   </body>
 </html>

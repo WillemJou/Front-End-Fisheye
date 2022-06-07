@@ -35,15 +35,6 @@ function displayDataPhoto(photographers, medias) {
     const findName =  findPhotographer().name;
     titleModal.append(findName);
 
-    const changeChevronEvent = () => {
-        const chevron = document.getElementsByClassName("chevron");
-        const changeChevron = () => { chevron.setAttribute("src", "assets/images/chevron-up-solid.png");
-        filter_categories.addEventListener("mouseover", changeChevron());
-        };
-    }; 
-
-
-
     //fonction somme des likes 
     const likeSum = () => {
         const likes = findMedias.map(item => (item.likes));
@@ -62,7 +53,7 @@ function displayDataPhoto(photographers, medias) {
     }    
     // filtre selon like (plus pop)
     const popFilter = () => {
-        const pop = document.getElementsByClassName("pop");
+        const pop = document.querySelector(".pop");
         const popEvent = () =>{
             pop.addEventListener("click", biggestToLowestLikesArray);
             return popEvent();
@@ -71,16 +62,16 @@ function displayDataPhoto(photographers, medias) {
     };
 
     // incrémenter like +1
-    const incrementsLike = () => {
-        const layoutPhoto = document.getElementsByClassName("layout-photo");
+    const incrementLikes = () =>{
         let likes = findMedias.map(item => (item.likes));
-       // console.log(likes);
-        likes.forEach(() => {
-            let likesPlus1 = ++likes;
-           // console.log(likesPlus1);
+        let likesPlus1 = ++likes;
+        const likeContainer = document.querySelectorAll(".like-container");
+        likeContainer.forEach(() => {
+            likeContainer.addEventListener("click", likesPlus1);
         });
-    }
-//console.log(incrementsLike());
+       // console.log(likesPlus1);
+   }
+incrementLikes();
  
     findMedias.forEach((media) => {
         const mediaModel = mediaFactory(media); 
