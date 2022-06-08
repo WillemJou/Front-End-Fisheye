@@ -95,11 +95,12 @@ function mediaFactory(data) {
         
         const getVideoCardDom = () => {
             videos.setAttribute("src", short);
+            videos.setAttribute("controls", "controls");
             layoutVideo.append(layoutCard, videos);
             return layoutVideo;
         };
         
-        return getPictureCardDom();
+        return data.video ? getVideoCardDom() : getPictureCardDom() ;
     };
 return { id, picture, generateMediaElement};
 };
