@@ -61,31 +61,24 @@ function displayDataPhoto(photographers, medias) {
     return popFilter();
     };
 
-    // incrémenter like +1
-    const likeDiv = document.getElementsByClassName("like");
+  
+    
+    findMedias.forEach((media) => {
 
-    const incrementLikes = () =>{
+        const likeContainer = document.querySelector(".like-container");
         let likes = findMedias.map(item => (item.likes));
-        console.log(likes);
-         likes.forEach(like => {
-             likesPlus1 = like+1;
-            console.log(likesPlus1);
-        });
+        let likesPlus1 = 0;
         
-        // likeDiv.addEventListener("click", () => {
-          //  });
-        
-       // });
-        
-        //const likeContainer = document.querySelectorAll(".like-container");
-        
-    }
-    incrementLikes();
-   
-   findMedias.forEach((media) => {
-       const mediaModel = mediaFactory(media); 
-       const userMediaCardDOM = mediaModel.generateMediaElement(media);
-       photographiesSection.append(userMediaCardDOM);
+        const incrementLikes = () =>{
+            likes.forEach(like => {
+                likesPlus1 += like +1
+            });   
+            likeContainer.addEventListener("click", incrementLikes); 
+            return incrementLikes; 
+        }
+        const mediaModel = mediaFactory(media); 
+        const userMediaCardDOM = mediaModel.generateMediaElement(media);
+        photographiesSection.append(userMediaCardDOM);
     });
 };
 
