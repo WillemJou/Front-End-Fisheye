@@ -73,10 +73,14 @@ function mediaFactory(data) {
     img.className = 'photos';
     img.setAttribute("alt", title);
     const videos = document.createElement("video");
+    videos.className ='videos';
     const layoutCard = document.createElement("div");
     const heart = document.createElement("img");
+    const like = document.createElement("div");
+    like.className ="like";
+    like.append(likes);
     const likeContainer = document.createElement("div");
-    likeContainer.append(likes, heart);
+    likeContainer.append(like, heart);
     likeContainer.className ='like-container';
     const dates = date;
     titlePhoto.textContent = title;
@@ -95,7 +99,6 @@ function mediaFactory(data) {
         
         const getVideoCardDom = () => {
             videos.setAttribute("src", short);
-            videos.setAttribute("controls", "controls");
             layoutVideo.append(layoutCard, videos);
             return layoutVideo;
         };

@@ -90,14 +90,12 @@ a{
 
 }
 #title_modal{
-    margin-top: 0;
-    
+    margin-top: 0;  
 }
 #open_modal_button{
     position: absolute;
     top: 13%;
     left: 50%;
-  
 }
 .photographer_header article {
   width: 100% ;
@@ -169,11 +167,13 @@ a{
     height: 100%;
     width: 100%;
     object-fit: cover;
+    cursor: pointer;
 }
 .photographies video {
-    height: 100%;
     width: 100%;
+    height: 100%;
     object-fit: cover;
+    cursor: pointer;
 }
 .photographies h3 {
    color:#901C1C;
@@ -210,6 +210,11 @@ a{
     color: black;
     padding: 0 9px;
 }
+.layout-videos{
+    position: relative;
+    z-index: 1;
+}
+
 
 
 

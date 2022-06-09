@@ -16,24 +16,24 @@
           <img src="assets/icons/close.svg" onclick="closeModal()" />
         </div>
         </header>
-        <form id="modal_form" method="get">
+        <form id="modal_form" method="get" novalidate>
           <div>
             <label>Prénom</label>
-            <input id="firstname" type="text" required minlength="2" />
+            <input id="firstname" type="text"  />
           </div>
           <div>
             <label>Nom</label>
-            <input id="lastname" type="text" required minlength="2" />
+            <input id="lastname" type="text"  />
           </div>
           <div>
             <label>Email</label>
-            <input id="email" type="email" required />
+            <input id="email" type="email"  />
           </div>
           <div>
             <label>Votre message</label>
             <input class="message-input" />
           </div>
-          <button id="send_button" class="contact_button">Envoyer</button>
+          <button id="send_button" type="submit" onclick="closeModal()" class="contact_button">Envoyer</button>
         </form>
       </div>
     </div>

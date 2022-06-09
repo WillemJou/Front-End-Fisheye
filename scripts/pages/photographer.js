@@ -62,21 +62,30 @@ function displayDataPhoto(photographers, medias) {
     };
 
     // incrémenter like +1
+    const likeDiv = document.getElementsByClassName("like");
+
     const incrementLikes = () =>{
         let likes = findMedias.map(item => (item.likes));
-        let likesPlus1 = ++likes;
-        const likeContainer = document.querySelectorAll(".like-container");
-        likeContainer.forEach(() => {
-            likeContainer.addEventListener("click", likesPlus1);
+        console.log(likes);
+         likes.forEach(like => {
+             likesPlus1 = like+1;
+            console.log(likesPlus1);
         });
-       // console.log(likesPlus1);
-   }
-incrementLikes();
- 
-    findMedias.forEach((media) => {
-        const mediaModel = mediaFactory(media); 
-        const userMediaCardDOM = mediaModel.generateMediaElement(media);
-        photographiesSection.append(userMediaCardDOM);
+        
+        // likeDiv.addEventListener("click", () => {
+          //  });
+        
+       // });
+        
+        //const likeContainer = document.querySelectorAll(".like-container");
+        
+    }
+    incrementLikes();
+   
+   findMedias.forEach((media) => {
+       const mediaModel = mediaFactory(media); 
+       const userMediaCardDOM = mediaModel.generateMediaElement(media);
+       photographiesSection.append(userMediaCardDOM);
     });
 };
 
