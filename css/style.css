@@ -13,7 +13,7 @@ body {
 }
 h1 {
     color: #901C1C;
-    margin-right: 100px;
+    margin-left: 100px;
 }
 a{
     text-decoration: none;
@@ -94,7 +94,7 @@ a{
 }
 #open_modal_button{
     position: absolute;
-    top: 13%;
+    top: 30%;
     left: 50%;
 }
 .photographer_header article {

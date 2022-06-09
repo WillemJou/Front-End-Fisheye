@@ -8,7 +8,7 @@
 
 .modal {
     width: 50%;
-    min-height: 20px;
+    height: 88%;
     display:  flex;
     z-index: 2;
     border-radius: 5px;
@@ -55,6 +55,7 @@
     display: flex;
     font-size: 45px;
     font-weight: normal;
+    margin: 0;
 }
 
 form {
@@ -74,18 +75,18 @@ form div {
     flex-direction: column;
     width: 100%;
     align-items: self-start;
-    margin-bottom: 26px;
+    margin-bottom: 1vh;
 }
 
 form input {
     width: 100%;
-    height: 68px;
+    height: 6vh;
     border: none;
     border-radius: 5px;
     font-size: 33px;
 }
 .message-input {
-   height: 20vh;
+   height: 6vh;
    min-height: 5px;
 }
 
