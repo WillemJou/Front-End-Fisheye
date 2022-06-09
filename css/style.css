@@ -62,12 +62,13 @@ a{
     margin: 0;
     color: #901C1C;
 }
-.photographer_section a img {
+.photographer_section a img, .photographer_header img {
     height: 200px;
     width: 200px;
     border-radius: 50%;
     object-fit: cover;
 }
+
 .photographer_section .descriptif-photographer{
     display: flex;
     text-align: center;
@@ -88,14 +89,13 @@ a{
     flex-direction: row-reverse;
     justify-content: space-between;
     pointer-events: none;
-
 }
 #title_modal{
     margin-top: 0;  
 }
 #open_modal_button{
     position: absolute;
-    top: 30%;
+    top: 173px;
     left: 50%;
 }
 .photographer_header article {
@@ -107,12 +107,7 @@ a{
 .photographer_header h3 {
   color: #901C1C;
 }
-.photographer_header img { 
-    height: 200px;
-    width: 200px;
-    border-radius: 50%;
-    object-fit: cover;
-}
+
 .photographer_header .p-price-homepage  {
     display: none;
 }
