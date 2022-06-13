@@ -5,9 +5,6 @@ async function getPhotographers() {
     const datas = await res.json()
     return datas; 
 };
-const biggestToLowest = (a, b) =>{
-    return b - a
-};
 
 
 function displayDataPhoto(photographers, medias) {
@@ -24,7 +21,7 @@ function displayDataPhoto(photographers, medias) {
         const findPhotographer = photographers.find( item => item.id === Number(urlIdParams));
         return findPhotographer;
     };
-
+    
     const findMedias =  medias.filter( media => media.photographerId === Number(urlIdParams));
     const photographerModel = photographerFactory(findPhotographer());
     const userCardDOM = photographerModel.getUserCardDOM();
@@ -34,7 +31,7 @@ function displayDataPhoto(photographers, medias) {
     const titleModal = document.getElementById("title_modal");
     const findName =  findPhotographer().name;
     titleModal.append(findName);
-
+    
     //fonction somme des likes 
     const likeSum = () => {
         const likes = findMedias.map(item => (item.likes));
@@ -46,40 +43,58 @@ function displayDataPhoto(photographers, medias) {
     };
     likeSum();
     
-    // tableau like du + au -
-    const biggestToLowestLikesArray = () =>{ 
+
+    const biggestToLowest = (a, b) =>{
+        return b - a
+    };
+    const biggestToLowestLikesArray = (media) =>{ 
+        const likes = findMedias.map(item => (item.likes));        
+        console.log(likes);
         const filterLikes = likes.sort(biggestToLowest);
         return filterLikes;
     }    
-    // filtre selon like (plus pop)
-    const popFilter = () => {
-        const pop = document.querySelector(".pop");
-        const popEvent = () =>{
-            pop.addEventListener("click", biggestToLowestLikesArray);
-            return popEvent();
-        };   
-    return popFilter();
-    };
-
-  
+    
     
     findMedias.forEach((media) => {
-
-        const likeContainer = document.querySelector(".like-container");
-        let likes = findMedias.map(item => (item.likes));
-        let likesPlus1 = 0;
-        
-        const incrementLikes = () =>{
-            likes.forEach(like => {
-                likesPlus1 += like +1
-            });   
-            likeContainer.addEventListener("click", incrementLikes); 
-            return incrementLikes; 
-        }
         const mediaModel = mediaFactory(media); 
         const userMediaCardDOM = mediaModel.generateMediaElement(media);
         photographiesSection.append(userMediaCardDOM);
+        // tableau like du + au -
+    
+        // filtre selon like (plus pop)
+        const pop = document.querySelectorAll(".pop");
+        const popFilter = () => {
+                pop.addEventListener("click", biggestToLowestLikesArray);
+        };
+    }); 
+    
+    const likeDivs = document.querySelectorAll(".like");
+    const likeContainers = document.querySelectorAll(".like-container");
+    
+    const incrementLikes = (media) =>{
+        const res = media.likes +1;
+        likeDivs.innerText = res;
+        console.log(likeDivs);
+        console.log(res);
+    };
+    
+    findMedias.forEach(media => {
+        const updatedLikesCount = incrementLikes(media);
     });
+    likeContainers.forEach(likeContainer => {
+        likeContainer.addEventListener('click', incrementLikes);
+        
+    });
+    
+    
+    //focus photos
+    const focusArticle = () => {
+        const article = document.getElementsByTagName('article').focus();
+        article.tabIndex = 0;
+        return focusArticle;
+    };
+    
+
 };
 
 async function init() {

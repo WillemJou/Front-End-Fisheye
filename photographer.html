@@ -8,61 +8,61 @@
     <title>Fisheye - photographe </title>
   </head>
   <body>
-    <div id="contact_modal" aria-hidden="true" role="dialog" aria-describedby="Contact">
+    <aside id="contact_modal" aria-hidden="true" role="dialog" aria-labelledby="title_modal">
       <div class="modal">
         <header>
           <div class="title-modal_layout">
           <h2 id="title_modal">Contactez-moi <br> </h2>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <img src="assets/icons/close.svg" aria-label="Fermer le formulaire de contact" onclick="closeModal()" />
         </div>
         </header>
         <form id="modal_form" method="get" novalidate>
           <div>
-            <label>Prénom</label>
-            <input id="firstname" type="text"  />
+            <label id="prénom" for="prénom">Prénom</label>
+            <input id="input_prénom" aria-labelledby="prénom" type="text"  />
           </div>
           <div>
-            <label>Nom</label>
-            <input id="lastname" type="text"  />
+            <label id="nom" for="nom">Nom</label>
+            <input id="input_nom" aria-labelledby="nom" type="text"  />
           </div>
           <div>
-            <label>Email</label>
-            <input id="email" type="email"  />
+            <label id="email" for="email">Email</label>
+            <input id="input_email" aria-labelledby="email" type="email"  />
           </div>
           <div>
-            <label>Votre message</label>
-            <input class="message-input" />
+            <label id="message" for="votre message">Votre message</label>
+            <input id="input_message" aria-labelledby="message" class="message-input" />
           </div>
-          <button id="send_button" type="submit" onclick="closeModal()" class="contact_button">Envoyer</button>
+          <button id="send_button" type="submit" onclick="closeModal()" aria-label="Envoyer" class="contact_button">Envoyer</button>
         </form>
       </div>
-    </div>
+    </aside>
     <header class="header-page">
-     <a href="index.html"><img src="assets/images/logo.png" alt="Fish Eye Home page" class="logo" /></a>
+     <a href="index.html"><img src="assets/images/logo.png" alt="Fish Eye Page d'accueil" class="logo" /></a>
     </header>
     <main id="main" aria-hidden="false">
       <div class="photographer_header">
-        <button id="open_modal_button" class="contact_button" onclick="displayModal()">Contactez-moi</button>
+        <button id="open_modal_button" class="contact_button" aria-label="Contactez-moi" onclick="displayModal()">Contactez-moi</button>
       </div>
-      <section id="filter" class="filters">Trier par
-        <div id="filter_categories" class="filter-categories">
-          <div class="pop">
+      <label name="menu de sélection" id="filter" class="filters">Trier par
+        <select name="Par ordre de"  id="filter_categories" class="filter-categories">
+          <option value="popularité" class="pop">
             Popularité <img src="assets/images/chevron-down-solid.png" class="chevron"/>
-          </div>
-          <div class="date">
+          </option>
+          <option value="date" class="date">
             Date
-          </div>
-          <div class="title">
+          </option>
+          <option value="titre" class="title">
             Titre
-          </div>
-        </div>
-      </section>
+          </option>
+        </select>
+      </label>
       <section class="photographies">
       </section>
       <aside class="sticky-card" id="sticky_card">
       </aside>
     </main>
-    <article class="lightbox" id="lb_container" aria-hidden="true" role="dialog" aria-describedby="LightBox" >
+    <article class="lightbox" id="lb_container" aria-hidden="true" aria-label="image en vue rapprochée" role="dialog" aria-describedby="LightBox" >
         <button class="lightbox__previous">
           <img class="prev-chevron" src="assets/images/chevron-prev.png" alt=""></button>
         <button class="lightbox__next">

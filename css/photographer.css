@@ -18,15 +18,30 @@
     justify-content: space-between;
     padding: 35px;
     margin: auto;
-
+    animation: open-slide .5s;
 }
+
+#contact_modal[aria-hidden="true"] .modal {
+    animation: close-slide .6s;
+}
+
+@keyframes open-slide {
+    from { transform: translateY(-50%);}
+    to { transform: translateY(0);}
+}
+@keyframes close-slide {
+    from { transform: translateY(0);}
+    to { transform: translateY(-50%);}
+}
+
+
 .contact_button {
     font-size: 20px;
     font-weight: bold;
     color: white;
     padding: 11px;
-    width: 170px;
-    height: 6vh;
+    width: 160px;
+    height: 5vh;
     border: none;
     background-color: #901C1C;
     border-radius: 5px;

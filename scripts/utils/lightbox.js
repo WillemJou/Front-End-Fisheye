@@ -7,17 +7,16 @@ const img = document.querySelector(".photos");
 
 
 const displayLightbox = (e) => {
+    e.preventDefault();
     lightBox.style.display = "flex";
+    lightBox.removeAttribute('aria-hidden');
+    lightBox.setAttribute('aria-modal', true);
+    img.addEventListener('click', displayLightbox());
 }
 
 const closeLightbox =  () => {
     lightBox.style.display = "none";
-}
-
-const openLightboxEvent = () =>{ 
-    img.addEventListener('click', displayLightbox());
-}
-
-const closeLightboxEvent = () => {
+    lightBox.removeAttribute('aria-modal');
+    lightBox.setAttribute('aria-hidden', true);
     closeLightboxButton.addEventListener('click', closeLightbox());
 }
