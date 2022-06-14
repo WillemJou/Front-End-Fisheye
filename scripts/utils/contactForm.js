@@ -1,4 +1,5 @@
 
+
 const button = document.getElementById("open_modal_button");
 const contactModal = document.getElementById("contact_modal");
 const modal = document.getElementsByClassName("modal");
@@ -13,7 +14,7 @@ function displayModal() {
     descriptif.style.visibility = "hidden";
     contactModal.setAttribute('aria-modal', "true" );
     contactModal.removeAttribute('aria-hidden');
-}
+};
 
 function closeModal() {
     window.setTimeout(() => {
@@ -32,20 +33,22 @@ window.addEventListener("keydown", (e) => {
     };
 });
 
-
-
 // console log des input 
 const first = document.getElementById('firstname');
 const last = document.getElementById('lastname');
 const email = document.getElementById('email');
-
-const focusModal = (e) => {
-    button.addEventListener("click", first.autofocus());
-}
 
 form.onsubmit = () => {
     console.log("prénom", first.value);
     console.log("nom", last.value);
     console.log("email", email.value);
         return false;
-}
+};
+
+
+// focus sur 1er input quand modal ouverte
+const focusModal = (e) => {
+    button.addEventListener("click", first.focus());
+};
+
+

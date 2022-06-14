@@ -81,12 +81,16 @@ function mediaFactory(data) {
     const like = document.createElement("div");
     like.className ="like";
     like.append(likes);
+    const lightBox = document.getElementById("lb_container");
     const imgLink = document.createElement("a");
     const mediaLink = document.createElement("a");
-    imgLink.setAttribute("href", imgLink);
-    mediaLink.setAttribute("href", mediaLink);
+    imgLink.setAttribute("href", "");
+    mediaLink.setAttribute("href", "");
+    imgLink.setAttribute("onclick", displayLightbox);
     imgLink.append(img);
     mediaLink.append(videos);
+    imgLink.setAttribute("id", "link_img");
+    mediaLink.setAttribute("id", "link_video");
     const likeContainer = document.createElement("div");
     likeContainer.append(like, heart);
     likeContainer.className ='like-container';

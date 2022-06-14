@@ -53,46 +53,44 @@ function displayDataPhoto(photographers, medias) {
         const filterLikes = likes.sort(biggestToLowest);
         return filterLikes;
     }    
+    // filtre selon like (plus pop)
+    const pop = document.querySelectorAll(".pop");
+    const popFilter = () => {
+        pop.addEventListener("click", biggestToLowestLikesArray);
+    };
     
+
+
     
     findMedias.forEach((media) => {
         const mediaModel = mediaFactory(media); 
         const userMediaCardDOM = mediaModel.generateMediaElement(media);
         photographiesSection.append(userMediaCardDOM);
-        // tableau like du + au -
-    
-        // filtre selon like (plus pop)
-        const pop = document.querySelectorAll(".pop");
-        const popFilter = () => {
-                pop.addEventListener("click", biggestToLowestLikesArray);
-        };
-    }); 
-    
-    const likeDivs = document.querySelectorAll(".like");
-    const likeContainers = document.querySelectorAll(".like-container");
-    
-    const incrementLikes = (media) =>{
-        const res = media.likes +1;
-        likeDivs.innerText = res;
-        console.log(likeDivs);
-        console.log(res);
-    };
-    
-    findMedias.forEach(media => {
-        const updatedLikesCount = incrementLikes(media);
-    });
-    likeContainers.forEach(likeContainer => {
-        likeContainer.addEventListener('click', incrementLikes);
         
     });
-    
-    
-    //focus photos
-    const focusArticle = () => {
-        const article = document.getElementsByTagName('article').focus();
-        article.tabIndex = 0;
-        return focusArticle;
+
+    // incrementation likes 
+    const likeDivs = document.querySelectorAll(".like");
+    const likeContainers = document.querySelectorAll(".like-container");
+
+    const incrementLikes = (media) =>{
+        const res = media.likes + 1;
+        likeDivs.innerText = res;
     };
+
+    // au click
+    const likeEvent = () => { 
+        likeContainers.forEach(likeContainer => {
+            likeContainer.addEventListener('click', () =>{
+                likeDivs.forEach(likeDiv => {
+                    likeDiv.innerText = incrementLikes();
+                });
+            });
+        });
+    }; 
+ likeEvent();   
+        
+    
     
 
 };
