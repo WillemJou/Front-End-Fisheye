@@ -3,10 +3,13 @@
 const button = document.getElementById("open_modal_button");
 const contactModal = document.getElementById("contact_modal");
 const modal = document.getElementsByClassName("modal");
-const sendButton = document.getElementById("send_button");
+const sendButton = document.getElementById("send__button");
 const form = document.getElementById("modal_form");
-const descriptif = document.querySelector(".photographer_header");
-
+const descriptif = document.querySelector(".photographer__header");
+// pour console log des input 
+const first = document.getElementById('input_prénom');
+const last = document.getElementById('input_nom');
+const email = document.getElementById('input_email');
 
 function displayModal() {
 	contactModal.style.display = "flex";
@@ -14,6 +17,7 @@ function displayModal() {
     descriptif.style.visibility = "hidden";
     contactModal.setAttribute('aria-modal', "true" );
     contactModal.removeAttribute('aria-hidden');
+    first.focus();
 };
 
 function closeModal() {
@@ -33,11 +37,7 @@ window.addEventListener("keydown", (e) => {
     };
 });
 
-// console log des input 
-const first = document.getElementById('firstname');
-const last = document.getElementById('lastname');
-const email = document.getElementById('email');
-
+// affiche les entrées des input quand soumission formulaire
 form.onsubmit = () => {
     console.log("prénom", first.value);
     console.log("nom", last.value);
@@ -46,9 +46,6 @@ form.onsubmit = () => {
 };
 
 
-// focus sur 1er input quand modal ouverte
-const focusModal = (e) => {
-    button.addEventListener("click", first.focus());
-};
+
 
 

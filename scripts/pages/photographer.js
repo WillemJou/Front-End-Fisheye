@@ -7,12 +7,12 @@ async function getPhotographers() {
 };
 
 
-function displayDataPhoto(photographers, medias) {
-    const photographersHeader = document.querySelector(".photographer_header");
+function displayDataPhoto(photographers, allMedias) {
+    const photographersHeader = document.querySelector(".photographer__header");
     const photographiesSection = document.querySelector(".photographies");
     
     // récupération parametre id de l'URL
-    const queryString = window.location.search;
+    const queryString = window.location.search;                             
     const urlParams = new URLSearchParams(queryString);
     const urlIdParams = urlParams.get ('id');
     
@@ -22,7 +22,7 @@ function displayDataPhoto(photographers, medias) {
         return findPhotographer;
     };
     
-    const findMedias =  medias.filter( media => media.photographerId === Number(urlIdParams));
+    const medias =  allMedias.filter( media => media.photographerId === Number(urlIdParams));
     const photographerModel = photographerFactory(findPhotographer());
     const userCardDOM = photographerModel.getUserCardDOM();
     photographersHeader.appendChild(userCardDOM);
@@ -32,24 +32,13 @@ function displayDataPhoto(photographers, medias) {
     const findName =  findPhotographer().name;
     titleModal.append(findName);
     
-    //fonction somme des likes 
-    const likeSum = () => {
-        const likes = findMedias.map(item => (item.likes));
-        const reducer = (acc, curr) => acc + curr;
-        const sum = likes.reduce(reducer);
-        const stickyCard = document.getElementById('sticky_card');
-        stickyCard.append(sum);
-        return (sum);
-    };
-    likeSum();
     
-
+    
     const biggestToLowest = (a, b) =>{
         return b - a
     };
     const biggestToLowestLikesArray = (media) =>{ 
-        const likes = findMedias.map(item => (item.likes));        
-        console.log(likes);
+        const likes = allMedias.map(item => (item.likes));        
         const filterLikes = likes.sort(biggestToLowest);
         return filterLikes;
     }    
@@ -59,39 +48,99 @@ function displayDataPhoto(photographers, medias) {
         pop.addEventListener("click", biggestToLowestLikesArray);
     };
     
-
-
-    
-    findMedias.forEach((media) => {
+    medias.forEach((media) => {
         const mediaModel = mediaFactory(media); 
         const userMediaCardDOM = mediaModel.generateMediaElement(media);
         photographiesSection.append(userMediaCardDOM);
         
     });
 
+    let findTmpLikes = medias.map(item => (item.likes));
+    const stickyCard = document.getElementById('sticky_card');
+    
     // incrementation likes 
-    const likeDivs = document.querySelectorAll(".like");
-    const likeContainers = document.querySelectorAll(".like-container");
+    const likeContainers = document.querySelectorAll(".like__container");
 
-    const incrementLikes = (media) =>{
-        const res = media.likes + 1;
-        likeDivs.innerText = res;
+    likeContainers.forEach((likeContainer) => {
+        let tmpLike = Number(likeContainer.childNodes[0].innerHTML);
+        
+        likeContainer.addEventListener("click", (e) => {
+            const g = likeContainer.childNodes[0].innerHTML;
+            const like = Number(g);
+            const incrementLikePhoto  =
+            like === tmpLike ? like + 1 : tmpLike;
+            likeContainer.childNodes[0].innerHTML = incrementLikePhoto;  
+        }); 
+        likeContainer.addEventListener("keydown", (e) => {
+            if (e.key === "Enter"){
+            const g = likeContainer.childNodes[0].innerHTML;
+            const like = Number(g);
+            const incrementLikePhoto  =
+            like === tmpLike ? like + 1 : tmpLike;
+            likeContainer.childNodes[0].innerHTML = incrementLikePhoto; 
+            };
+        });
+    });
+    
+    //likes sum 
+    const reducer = (acc, curr) => acc + curr;
+    let sum = findTmpLikes.reduce(reducer);
+    const totalPriceContainer = document.createElement("div");
+    totalPriceContainer.setAttribute("classe", "total-price__container");
+    totalPriceContainer.append(sum)
+    stickyCard.append(totalPriceContainer);
+    
+    // LIGHTBOX
+    // DOM lightbox
+    const lightBox = document.getElementById("lb_container");
+    const closeLightboxButton = document.querySelector(".lightbox__close");
+    const imgsAndVids = document.querySelectorAll(".medias");
+    const next = document.querySelector(".lightbox__next");
+    const prev = document.querySelector(".lightbox__previous");
+    
+    const displayLightbox = () => {
+        const open = lightBox.style.display = "flex";
+        lightBox.removeAttribute('aria-hidden');
+        lightBox.setAttribute('aria-modal', true); 
+    };
+    
+    const closeLightbox =  () => {
+        lightBox.style.display = "none";
+        lightBox.removeAttribute('aria-modal');
+        lightBox.setAttribute('aria-hidden', true);
     };
 
-    // au click
-    const likeEvent = () => { 
-        likeContainers.forEach(likeContainer => {
-            likeContainer.addEventListener('click', () =>{
-                likeDivs.forEach(likeDiv => {
-                    likeDiv.innerText = incrementLikes();
-                });
+    
+    imgsAndVids.forEach((imgAndVid) => {
+        
+        imgAndVid.addEventListener("click", (e) => {
+            displayLightbox();
+            const imgAndVidLightbox = imgAndVid.cloneNode(true);
+            imgAndVidLightbox.setAttribute("controls", true);
+            imgAndVidLightbox.setAttribute("autoplay", true);
+            
+            // indexer le tableau d'image à l'ouverture de la lightbox
+            // tableau des images 
+            const arrayMedias = Array.from(imgsAndVids);
+            console.log(arrayMedias);
+            const imgAndVidsIndex = arrayMedias.findIndex(i => i === imgAndVid);
+            
+            // incrémentation tableau avec la flèche next
+            next.addEventListener("click", (e) => {
+                displayLightbox(arrayMedias[imgsAndVids + 1]);
+                imgAndVidLightbox;
+            
+            });
+            const contentLightbox = lightBox.append(imgAndVidLightbox); 
+
+            closeLightboxButton.addEventListener('click', (e) => {
+                closeLightbox();
+                imgsAndVids.forEach((imgAndVid) => {
+                    imgAndVidLightbox.remove();
+                });  
             });
         });
-    }; 
- likeEvent();   
-        
-    
-    
+    });
 
 };
 
@@ -99,8 +148,8 @@ async function init() {
     // Récupère les datas  
     const datas = await getPhotographers();
     const photographers = datas.photographers;
-    const medias = datas.medias;
-    displayDataPhoto(photographers, medias); 
+    const allmedias = datas.medias;
+    displayDataPhoto(photographers, allmedias); 
 };
 init();
 

@@ -35,7 +35,7 @@
 }
 
 
-.contact_button {
+.contact__button {
     font-size: 20px;
     font-weight: bold;
     color: white;
@@ -47,7 +47,7 @@
     border-radius: 5px;
     cursor: pointer;
 }
-.title-modal_layout{
+.title-modal__layout{
     display: flex;
     margin: auto;
     justify-content: flex-start;
@@ -99,7 +99,7 @@ form input {
     border-radius: 5px;
     font-size: 1.5em;
 }
-.message-input {
+.message__input {
    height: 10vh;
    min-height: 5px;
 }
@@ -114,7 +114,7 @@ form input {
     z-index: 1;
 }
 
-.next-chevron, .prev-chevron, .lightbox__close-img{
+.next__chevron, .prev__chevron, .lightbox__close-img{
     width: 30px;
     height:  30px;
     border: none;
@@ -140,6 +140,15 @@ form input {
    top: 0;
    height: 10%;
 }
+
+.lightbox .medias {
+    max-width: 88%;
+    max-height: 100vh;
+    margin: auto;
+    height: auto;  
+}
+
+
 
 
 

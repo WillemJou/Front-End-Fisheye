@@ -28,10 +28,10 @@ function photographerFactory(data) {
         a.href += "?id=" + idPhotographers;
         h2.textContent = name;       
         h3.textContent = (city + commaSpace + country); 
-        pTagline.className = 'p-tagline-homepage';
+        pTagline.className = 'p-tagline__homepage';
         pTagline.textContent = tagline;  
-        pPrice.className = 'p-price-homepage'; 
-        descriptifPhotographer.className = 'descriptif-photographer';
+        pPrice.className = 'p-price__homepage'; 
+        descriptifPhotographer.className = 'descriptif__photographer';
         descriptifPhotographer.setAttribute("id", "description_photographer");
         pPrice.textContent = price + textPrice;
         img.setAttribute("src", picture);
@@ -49,7 +49,7 @@ function photographerFactory(data) {
             const stickyCard =  document.getElementById('sticky_card');
             const blackHeart = document.createElement("img");
             blackHeart.setAttribute("src", blackHeartPng);
-            blackHeart.className = 'heart-black';
+            blackHeart.className = 'heart__black';
             stickyCard.append(price, textPrice, blackHeart);
         };
         descriptifPhotographer.append(h3, pTagline, pPrice);
@@ -67,51 +67,45 @@ function mediaFactory(data) {
     const heartPng = `assets/images/heart-solid.png`;
     const titlePhoto = document.createElement("h3");
     const layoutPhoto = document.createElement("article");
-    layoutPhoto.className = 'layout-photo';
+    layoutPhoto.className = 'layout__photo';
+    layoutPhoto.tabIndex = 0;
     const layoutVideo = document.createElement("article");
-    layoutVideo.className = 'layout-video';
+    layoutVideo.className = 'layout__video';
+    layoutVideo.tabIndex = 0;
     const img = document.createElement("img");
-    img.className = 'photos';
+    img.className = 'medias';
     img.setAttribute("alt", title);
     const videos = document.createElement("video");
-    videos.className ='videos';
+    videos.className = 'medias';
+    videos.classList.add("videos");
     const layoutCard = document.createElement("div");
     const heart = document.createElement("img");
     heart.setAttribute("alt", "liker si vous aimez");
     const like = document.createElement("div");
     like.className ="like";
     like.append(likes);
-    const lightBox = document.getElementById("lb_container");
-    const imgLink = document.createElement("a");
-    const mediaLink = document.createElement("a");
-    imgLink.setAttribute("href", "");
-    mediaLink.setAttribute("href", "");
-    imgLink.setAttribute("onclick", displayLightbox);
-    imgLink.append(img);
-    mediaLink.append(videos);
-    imgLink.setAttribute("id", "link_img");
-    mediaLink.setAttribute("id", "link_video");
     const likeContainer = document.createElement("div");
     likeContainer.append(like, heart);
-    likeContainer.className ='like-container';
+    likeContainer.className ='like__container';
+    likeContainer.tabIndex = 0;
     const dates = date;
     titlePhoto.textContent = title;
     heart.className = 'heart';
     heart.setAttribute("src", heartPng);
-    layoutCard.className = 'layout_card';
+    layoutCard.className = 'layout__card';
     layoutCard.append(titlePhoto, likeContainer);
 
-    function generateMediaElement() {
+   function generateMediaElement() {
         
         const getPictureCardDom =() => {
             img.setAttribute("src", picture);
-            layoutPhoto.append(layoutCard, imgLink);
+            layoutPhoto.append(layoutCard, img);
             return layoutPhoto;
         };
         
         const getVideoCardDom = () => {
             videos.setAttribute("src", short);
-            layoutVideo.append(layoutCard, mediaLink);
+            layoutVideo.append(layoutCard, videos);
             return layoutVideo;
         };
         
