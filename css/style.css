@@ -183,7 +183,7 @@ option {
 }
 .photographies article {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
 }
 .photographies .medias {
     height: 100%;

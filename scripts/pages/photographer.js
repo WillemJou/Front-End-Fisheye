@@ -1,3 +1,4 @@
+
 const localUrl = '../../data/photographers.json';
 
 async function getPhotographers() {
@@ -63,22 +64,19 @@ function displayDataPhoto(photographers, allMedias) {
 
     likeContainers.forEach((likeContainer) => {
         let tmpLike = Number(likeContainer.childNodes[0].innerHTML);
-        
-        likeContainer.addEventListener("click", (e) => {
-            const g = likeContainer.childNodes[0].innerHTML;
-            const like = Number(g);
-            const incrementLikePhoto  =
-            like === tmpLike ? like + 1 : tmpLike;
-            likeContainer.childNodes[0].innerHTML = incrementLikePhoto;  
-        }); 
-        likeContainer.addEventListener("keydown", (e) => {
-            if (e.key === "Enter"){
+        const increment = () => {
             const g = likeContainer.childNodes[0].innerHTML;
             const like = Number(g);
             const incrementLikePhoto  =
             like === tmpLike ? like + 1 : tmpLike;
             likeContainer.childNodes[0].innerHTML = incrementLikePhoto; 
-            };
+        };
+    
+        likeContainer.addEventListener("click", (e) => {
+            increment();
+        }); 
+        likeContainer.addEventListener("keydown", (e) => {
+            increment();
         });
     });
     
@@ -109,39 +107,65 @@ function displayDataPhoto(photographers, allMedias) {
         lightBox.removeAttribute('aria-modal');
         lightBox.setAttribute('aria-hidden', true);
     };
-
     
     imgsAndVids.forEach((imgAndVid) => {
         
-        imgAndVid.addEventListener("click", (e) => {
-            displayLightbox();
+        const lightboxContent = () => {
             const imgAndVidLightbox = imgAndVid.cloneNode(true);
             imgAndVidLightbox.setAttribute("controls", true);
             imgAndVidLightbox.setAttribute("autoplay", true);
-            
-            // indexer le tableau d'image à l'ouverture de la lightbox
+            const contentLightbox = lightBox.append(imgAndVidLightbox); 
+
+            const removeLightBoxContent = () =>{
+                imgsAndVids.forEach((imgAndVid) => {
+                imgAndVidLightbox.remove();
+                });  
+            };
+    
             // tableau des images 
             const arrayMedias = Array.from(imgsAndVids);
             console.log(arrayMedias);
+            // indexer le tableau d'image à l'ouverture de la lightbox 
             const imgAndVidsIndex = arrayMedias.findIndex(i => i === imgAndVid);
+            console.log(imgAndVidsIndex);
             
-            // incrémentation tableau avec la flèche next
+            //incrémentation tableau avec la flèche next
             next.addEventListener("click", (e) => {
-                displayLightbox(arrayMedias[imgsAndVids + 1]);
-                imgAndVidLightbox;
-            
+            console.log(arrayMedias[imgsAndVids + 1]);
             });
-            const contentLightbox = lightBox.append(imgAndVidLightbox); 
 
             closeLightboxButton.addEventListener('click', (e) => {
                 closeLightbox();
-                imgsAndVids.forEach((imgAndVid) => {
-                    imgAndVidLightbox.remove();
-                });  
+                removeLightBoxContent(); 
             });
+            closeLightboxButton.addEventListener('keydown', (e) => {
+                if (e.key === "Enter"){
+                    closeLightbox();
+                    removeLightBoxContent();
+                };
+            });
+            window.addEventListener("keydown", (e) => {
+                if (e.key === "Escape"){
+                    closeLightbox();
+                    removeLightBoxContent();
+                };
+            });
+        }; 
+     
+        imgAndVid.addEventListener("click", (e) => {
+            displayLightbox();
+            next.focus();  
+            lightboxContent();  
         });
-    });
 
+        imgAndVid.addEventListener("keydown", (e) => {
+            if (e.key === 'Enter'){
+                displayLightbox();
+                next.focus();  
+                lightboxContent(); 
+            };
+        });    
+    });
 };
 
 async function init() {

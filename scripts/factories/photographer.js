@@ -68,16 +68,16 @@ function mediaFactory(data) {
     const titlePhoto = document.createElement("h3");
     const layoutPhoto = document.createElement("article");
     layoutPhoto.className = 'layout__photo';
-    layoutPhoto.tabIndex = 0;
     const layoutVideo = document.createElement("article");
     layoutVideo.className = 'layout__video';
-    layoutVideo.tabIndex = 0;
     const img = document.createElement("img");
     img.className = 'medias';
     img.setAttribute("alt", title);
+    img.tabIndex = 0;
     const videos = document.createElement("video");
     videos.className = 'medias';
     videos.classList.add("videos");
+    videos.tabIndex = 0;
     const layoutCard = document.createElement("div");
     const heart = document.createElement("img");
     heart.setAttribute("alt", "liker si vous aimez");
@@ -99,13 +99,13 @@ function mediaFactory(data) {
         
         const getPictureCardDom =() => {
             img.setAttribute("src", picture);
-            layoutPhoto.append(layoutCard, img);
+            layoutPhoto.append(img, layoutCard);
             return layoutPhoto;
         };
         
         const getVideoCardDom = () => {
             videos.setAttribute("src", short);
-            layoutVideo.append(layoutCard, videos);
+            layoutVideo.append(videos, layoutCard);
             return layoutVideo;
         };
         
