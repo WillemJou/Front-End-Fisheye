@@ -56,12 +56,15 @@ function displayDataPhoto(photographers, allMedias) {
         
     });
 
-    let findTmpLikes = medias.map(item => (item.likes));
+
     const stickyCard = document.getElementById('sticky_card');
+    const totalPriceContainer = document.createElement("div");
+    totalPriceContainer.setAttribute("classe", "total-price__container");
+    stickyCard.append(totalPriceContainer);
     
     // incrementation likes 
     const likeContainers = document.querySelectorAll(".like__container");
-
+    
     likeContainers.forEach((likeContainer) => {
         let tmpLike = Number(likeContainer.childNodes[0].innerHTML);
         const increment = () => {
@@ -71,22 +74,34 @@ function displayDataPhoto(photographers, allMedias) {
             like === tmpLike ? like + 1 : tmpLike;
             likeContainer.childNodes[0].innerHTML = incrementLikePhoto; 
         };
-    
+        
         likeContainer.addEventListener("click", (e) => {
             increment();
+            totalSum();
+
         }); 
+
         likeContainer.addEventListener("keydown", (e) => {
             increment();
+            totalSum();
+        
         });
     });
     
     //likes sum 
-    const reducer = (acc, curr) => acc + curr;
-    let sum = findTmpLikes.reduce(reducer);
-    const totalPriceContainer = document.createElement("div");
-    totalPriceContainer.setAttribute("classe", "total-price__container");
-    totalPriceContainer.append(sum)
-    stickyCard.append(totalPriceContainer);
+    const likesArray = document.querySelectorAll(".like");
+    const firstTotalValues = [...likesArray].map(item => Number(item.innerHTML)).reduce((acc, cur) => cur + acc, 0);
+    console.log(firstTotalValues);
+    totalPriceContainer.append(firstTotalValues);
+    const totalSum = () => {
+        const values = [...likesArray].map(item => Number(item.innerHTML)).reduce((acc, cur) => cur + acc, 0);
+        totalPriceContainer.innerHTML="";
+        totalPriceContainer.append(values);
+
+    }
+  
+    
+    
     
     // LIGHTBOX
     // DOM lightbox
