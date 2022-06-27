@@ -77,6 +77,7 @@ function mediaFactory(data) {
     const videos = document.createElement("video");
     videos.className = 'medias';
     videos.classList.add("videos");
+    videos.setAttribute("alt", title);
     videos.tabIndex = 0;
     const layoutCard = document.createElement("div");
     const heart = document.createElement("img");

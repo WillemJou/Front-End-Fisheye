@@ -33,11 +33,10 @@ function displayDataPhoto(photographers, allMedias) {
     const findName =  findPhotographer().name;
     titleModal.append(findName);
     
-    
-    
     const biggestToLowest = (a, b) =>{
         return b - a
     };
+
     const biggestToLowestLikesArray = (media) =>{ 
         const likes = allMedias.map(item => (item.likes));        
         const filterLikes = likes.sort(biggestToLowest);
@@ -56,7 +55,7 @@ function displayDataPhoto(photographers, allMedias) {
         
     });
 
-
+    // DOM likes
     const stickyCard = document.getElementById('sticky_card');
     const totalPriceContainer = document.createElement("div");
     totalPriceContainer.setAttribute("classe", "total-price__container");
@@ -78,41 +77,33 @@ function displayDataPhoto(photographers, allMedias) {
         likeContainer.addEventListener("click", (e) => {
             increment();
             totalSum();
-
         }); 
 
         likeContainer.addEventListener("keydown", (e) => {
             increment();
             totalSum();
-        
         });
     });
     
     //likes sum 
     const likesArray = document.querySelectorAll(".like");
     const firstTotalValues = [...likesArray].map(item => Number(item.innerHTML)).reduce((acc, cur) => cur + acc, 0);
-    console.log(firstTotalValues);
     totalPriceContainer.append(firstTotalValues);
+
     const totalSum = () => {
         const values = [...likesArray].map(item => Number(item.innerHTML)).reduce((acc, cur) => cur + acc, 0);
         totalPriceContainer.innerHTML="";
         totalPriceContainer.append(values);
-
     }
   
-    
-    
-    
     // LIGHTBOX
-    // DOM lightbox
-    const lightBox = document.getElementById("lb_container");
-    const closeLightboxButton = document.querySelector(".lightbox__close");
     const imgsAndVids = document.querySelectorAll(".medias");
-    const next = document.querySelector(".lightbox__next");
-    const prev = document.querySelector(".lightbox__previous");
+    const lightBox = document.getElementById("lb_display");
+    let imgLightbox = new Image();
+    const videoLightbox = document.createElement('video');
     
     const displayLightbox = () => {
-        const open = lightBox.style.display = "flex";
+        lightBox.style.display = "flex";
         lightBox.removeAttribute('aria-hidden');
         lightBox.setAttribute('aria-modal', true); 
     };
@@ -126,27 +117,56 @@ function displayDataPhoto(photographers, allMedias) {
     imgsAndVids.forEach((imgAndVid) => {
         
         const lightboxContent = () => {
-            const imgAndVidLightbox = imgAndVid.cloneNode(true);
-            imgAndVidLightbox.setAttribute("controls", true);
-            imgAndVidLightbox.setAttribute("autoplay", true);
-            const contentLightbox = lightBox.append(imgAndVidLightbox); 
-
-            const removeLightBoxContent = () =>{
-                imgsAndVids.forEach((imgAndVid) => {
-                imgAndVidLightbox.remove();
-                });  
+            
+            // DOM lightbox
+            const closeLightboxButton = document.querySelector(".lightbox__close");
+            const nodeMediasToArray = [...imgsAndVids];
+            const srcArray = nodeMediasToArray.map(item => item.src);
+            console.log(srcArray); 
+            const next = document.querySelector(".lightbox__next");
+            const prev = document.querySelector(".lightbox__previous");
+            imgLightbox.className = 'img__lightbox';
+            videoLightbox.className = 'video__lightbox';
+            imgLightbox.tabIndex = 0;
+            videoLightbox.tabIndex = 0;
+            videoLightbox.setAttribute("controls", true);
+            videoLightbox.setAttribute("autoplay", true);
+            imgLightbox.setAttribute('alt', imgAndVid.alt);
+            videoLightbox.setAttribute ("alt", imgAndVid.alt);
+            imgLightbox.src = imgAndVid.src;
+            videoLightbox.src = imgAndVid.src; 
+            srcImg = imgLightbox.src; 
+            
+            
+            if ((imgAndVid.src).includes('jpg')){
+                lightBox.append(imgLightbox); 
+            } 
+            else if ((imgAndVid.src).includes('mp4')){
+                lightBox.append(videoLightbox);
+            }; 
+            
+            const removeLightBoxContent = () =>{ 
+                imgLightbox.remove();   
+                videoLightbox.remove();              
             };
-    
-            // tableau des images 
-            const arrayMedias = Array.from(imgsAndVids);
-            console.log(arrayMedias);
-            // indexer le tableau d'image à l'ouverture de la lightbox 
-            const imgAndVidsIndex = arrayMedias.findIndex(i => i === imgAndVid);
-            console.log(imgAndVidsIndex);
             
             //incrémentation tableau avec la flèche next
-            next.addEventListener("click", (e) => {
-            console.log(arrayMedias[imgsAndVids + 1]);
+            next.addEventListener("click", (event) => {
+                // source de l'img cliquée
+                srcImg = imgLightbox.src; 
+                console.log(srcImg);
+                // index d'img
+                let srcIndex = srcArray.findIndex(image => image === srcImg);
+                console.log(srcIndex);
+                const b = imgLightbox.src = srcArray[ srcIndex + 1];  
+                console.log(b);  
+            });
+            prev.addEventListener("click", (event) => {
+                // source de l'img cliquée
+                srcImg = imgLightbox.src; 
+                // index d'img
+                let srcIndex = srcArray.findIndex(image => image === srcImg);
+                const b = imgLightbox.src = srcArray[ srcIndex - 1];  
             });
 
             closeLightboxButton.addEventListener('click', (e) => {
@@ -169,14 +189,16 @@ function displayDataPhoto(photographers, allMedias) {
      
         imgAndVid.addEventListener("click", (e) => {
             displayLightbox();
-            next.focus();  
+            imgLightbox.focus();  
+            videoLightbox.focus();  
             lightboxContent();  
         });
 
         imgAndVid.addEventListener("keydown", (e) => {
             if (e.key === 'Enter'){
                 displayLightbox();
-                next.focus();  
+                imgLightbox.focus();  
+                videoLightbox.focus();    
                 lightboxContent(); 
             };
         });    

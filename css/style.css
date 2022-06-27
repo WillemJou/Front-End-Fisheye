@@ -1,4 +1,4 @@
-@import url("photographer.css");
+
 
 body {
     font-family: "DM Sans", sans-serif;
@@ -126,17 +126,34 @@ a{
     margin: 30px 0  0 100px;
     font-weight: bold;
 }
-.filter__categories{
+select {
+   appearance: none;
+   background-color: #901C1C;
+   border-radius: 5px;
+   padding: 9px 35px 10px 25px;
+   font-weight: normal;
+   color: #FAFAFA;
+   max-height: 37px;
+   overflow: hidden;
+   transition: 1s max-height 0.3s;
+   cursor: pointer;
+}
+
+.filter__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: #901C1C;
     margin-left: 20px;
     margin-top: -8px;
     border-radius: 5px;
-    padding: 9px 15px 10px 25px;
     font-weight: normal;
     color: #FAFAFA;
     max-height: 37px;
     overflow: hidden;
     transition: 1s max-height 0.3s;
+    cursor: pointer;
+    position: relative;
 }
 .pop, .date{
     padding: 15px 0 10px 15px;
@@ -149,9 +166,7 @@ option {
     border-radius: 5px;
     border-bottom: 1px solid #FAFAFA;
 }
-.filter__categories:hover {
-    max-height: 137px;
-}
+
 .title{
     border-radius: 5px;
     padding: 15px 0 10px 15px;
@@ -159,7 +174,11 @@ option {
 .chevron{
     width: 15px;
     height: 15px;
-    padding: 0 30px;
+    position: absolute;
+    top: 10px;
+    left: 104px;
+    cursor: pointer;
+    pointer-events: all;
 }
 .photographies {
     display: grid;
@@ -191,6 +210,23 @@ option {
     object-fit: cover;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.lb__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto 50px;
+    min-height: 100vh;
+}
+
+.lightbox .img__lightbox, .lightbox .video__lightbox  {
+    max-width: 88%;
+    max-height: 100vh;
+    margin: auto;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
 }
 
 .photographies h3 {
@@ -232,6 +268,157 @@ option {
 .layout__videos{
     position: relative;
     z-index: 1;
+}
+
+#contact_modal {
+    display: none;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.2);
+    width: 100%;
+    height: 100%;
+}
+
+.modal {
+    width: 50%;
+    display:  flex;
+    z-index: 2;
+    border-radius: 5px;
+    background-color: #DB8876;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 35px;
+    margin: auto;
+    animation: open-slide .5s;
+}
+
+#contact_modal[aria-hidden="true"] .modal {
+    animation: close-slide .6s;
+}
+
+@keyframes open-slide {
+    from { transform: translateY(-50%);}
+    to { transform: translateY(0);}
+}
+@keyframes close-slide {
+    from { transform: translateY(0);}
+    to { transform: translateY(-50%);}
+}
+
+
+.contact__button {
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    padding: 11px;
+    width: 160px;
+    height: 5vh;
+    border: none;
+    background-color: #901C1C;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.title-modal__layout{
+    display: flex;
+    margin: auto;
+    justify-content: flex-start;
+    align-items: baseline;
+    justify-content: space-between;
+}
+
+.modal header {
+    justify-content: space-between;
+    width: 100%;
+}
+
+.modal header img {
+    display: flex;
+    cursor: pointer;
+}
+
+.modal header h2 {
+    display: flex;
+    font-size: 3em;
+    font-weight: normal;
+    margin: 0;
+}
+
+form {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+form label {
+    color: #312E2E;
+    font-size: 2em;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: self-start;
+    margin-bottom: 1vh;
+}
+
+form input {
+    width: 100%;
+    height: 6vh;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.5em;
+}
+.message__input {
+   height: 10vh;
+   min-height: 5px;
+}
+
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(212, 209, 209, 0.884);
+}
+
+.next__chevron, .prev__chevron, .lightbox__close-img{
+    width: 30px;
+    height:  30px;
+    border: none;
+}
+
+.lightbox__close, .lightbox__previous, .lightbox__next {
+    display: flex;
+    position: fixed;
+    width: 50px;
+    height: 94%;
+    top: 130px;
+    right: 0;
+    cursor: pointer;
+    align-items: center;
+    background-color:transparent;
+    border: none;
+
+}
+.lightbox__previous{
+    right: auto ;
+}
+.lightbox__close{
+   top: 0;
+   height: 10%;
+}
+
+.lightbox .medias {
+    max-width: 88%;
+    max-height: 100vh;
+    margin: auto;
+    height: auto;  
 }
 
 

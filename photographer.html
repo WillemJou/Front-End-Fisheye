@@ -45,9 +45,10 @@
         <button id="open_modal_button" class="contact__button" aria-label="Contactez-moi" onclick="displayModal()">Contactez-moi</button>
       </div>
       <label name="menu de sélection" id="filter" class="filters">Trier par
+        <div class="filter__container">
         <select name="Par ordre de"  id="filter_categories" class="filter__categories">
           <option value="popularité" class="pop">
-            Popularité <img src="assets/images/chevron-down-solid.png" class="chevron"/>
+            Popularité 
           </option>
           <option value="date" class="date">
             Date
@@ -56,19 +57,23 @@
             Titre
           </option>
         </select>
+        <img src="assets/images/chevron-down-solid.png" class="chevron" alt="sélectionner le filtre souhaité"/>
+      </div>
       </label>
       <section class="photographies">
       </section>
       <aside class="sticky__card" id="sticky_card">
       </aside>
     </main>
-    <article class="lightbox" id="lb_container" aria-hidden="true" aria-label="image en vue rapprochée" role="dialog" aria-describedby="LightBox" >
+    <article class="lightbox" id="lb_display" aria-hidden="true" aria-label="image en vue rapprochée" role="dialog" aria-describedby="LightBox" >
+      
       <button class="lightbox__previous">
         <img class="prev__chevron" src="assets/images/chevron-prev.png" alt=""></button>
         <button class="lightbox__next">
           <img class="next__chevron" src="assets/images/chevron-next.png" alt=""></button>
           <button class="lightbox__close">
             <img class="lightbox__close-img" src="assets/images/close.png"></button>
+          
           </article>
           
           <script src="scripts/factories/photographer.js"></script>
