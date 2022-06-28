@@ -6,6 +6,7 @@ const modal = document.getElementsByClassName("modal");
 const sendButton = document.getElementById("send__button");
 const form = document.getElementById("modal_form");
 const descriptif = document.querySelector(".photographer__header");
+const label = document.querySelector(".filter__container");
 // pour console log des input 
 const first = document.getElementById('input_prénom');
 const last = document.getElementById('input_nom');
@@ -14,6 +15,7 @@ const email = document.getElementById('input_email');
 function displayModal() {
 	contactModal.style.display = "flex";
     button.style.visibility = "hidden";
+    label.style.visibility ="hidden";
     descriptif.style.visibility = "hidden";
     contactModal.setAttribute('aria-modal', "true" );
     contactModal.removeAttribute('aria-hidden');
@@ -25,6 +27,7 @@ function closeModal() {
         button.style.visibility = "visible"
         contactModal.style.display = "none"
         descriptif.style.visibility = "visible";
+        label.style.visibility ="visible";
     }, 500);
     contactModal.setAttribute('aria-hidden', "true" );
     contactModal.removeAttribute('aria-modal');

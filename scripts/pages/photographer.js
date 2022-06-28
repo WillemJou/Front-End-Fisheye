@@ -41,7 +41,22 @@ function displayDataPhoto(photographers, allMedias) {
         const likes = allMedias.map(item => (item.likes));        
         const filterLikes = likes.sort(biggestToLowest);
         return filterLikes;
-    }    
+    }
+    
+    // chevron filter
+    const selectFilterContainer = document.querySelector(".filter__categories");
+    const chevronUp = document.querySelector(".chevron-up");
+    const chevronDown = document.querySelector(".chevron-down");
+    let open = false;
+    const isOpen = () => {
+        open ? (chevronUp.style.visibility ="visible") (chevronDown.style.visibility ="hidden")
+        : (chevronDown.style.visibility ="visible") (chevronUp.style.visibility ="hidden");        
+    };
+    selectFilterContainer.addEventListener("click", (e) => {
+        open = !open;
+        isOpen();
+   });
+
     // filtre selon like (plus pop)
     const pop = document.querySelectorAll(".pop");
     const popFilter = () => {
