@@ -33,16 +33,6 @@ function displayDataPhoto(photographers, allMedias) {
     const findName =  findPhotographer().name;
     titleModal.append(findName);
     
-    const biggestToLowest = (a, b) =>{
-        return b - a
-    };
-
-    const biggestToLowestLikesArray = (media) =>{ 
-        const likes = allMedias.map(item => (item.likes));        
-        const filterLikes = likes.sort(biggestToLowest);
-        return filterLikes;
-    }
-    
     // chevron filter
     const selectFilterContainer = document.querySelector(".filter__categories");
     const chevronUp = document.querySelector(".chevron-up");
@@ -55,13 +45,55 @@ function displayDataPhoto(photographers, allMedias) {
     selectFilterContainer.addEventListener("click", (e) => {
         open = !open;
         isOpen();
-   });
+    });
+    
 
-    // filtre selon like (plus pop)
-    const pop = document.querySelectorAll(".pop");
-    const popFilter = () => {
-        pop.addEventListener("click", biggestToLowestLikesArray);
+    const biggestToLowest = (a, b) =>{
+        return b - a
     };
+    const biggestToLowestLikesArray = (media) =>{ 
+        const likes = allMedias.map(item => (item.likes));        
+        const filterLikes = likes.sort(biggestToLowest);
+        return filterLikes;
+    };
+    
+
+    // trie selon pop, date, titre
+    const option = document.querySelectorAll(".options");
+    const pop = document.querySelector(".pop");
+    const date = document.querySelector(".date");
+    const title = document.querySelector(".title");
+
+    selectFilterContainer.addEventListener('click', (e) => {
+        const choice = e.target.value;
+        
+        switch (choice) {
+                
+            case pop:
+                medias.sort((a, b) => {
+                    if (a.likes < b.likes) return 1;
+                    if (a.likes > b.likes) return -1;
+                    return 0;
+                    });
+                    break;
+                
+            case date:
+                medias.sort((a, b) => {
+                    if (a.date < b.date) return 1;
+                    if (a.date > b.date) return -1;
+                    return 0;
+                    });
+                break;
+                
+            case title:
+                medias.sort((a, b) => {
+                    if (a.title < b.title) return -1;
+                    if (a.title > b.title) return 1;
+                    return 0;
+                    });					
+                break;
+                }});
+        
     
     medias.forEach((media) => {
         const mediaModel = mediaFactory(media); 
@@ -110,12 +142,14 @@ function displayDataPhoto(photographers, allMedias) {
         totalPriceContainer.innerHTML="";
         totalPriceContainer.append(values);
     }
-  
+    
     // LIGHTBOX
     const imgsAndVids = document.querySelectorAll(".medias");
     const lightBox = document.getElementById("lb_display");
     let imgLightbox = new Image();
     const videoLightbox = document.createElement('video');
+    const next = document.querySelector(".lightbox__next");
+    const prev = document.querySelector(".lightbox__previous");
     
     const displayLightbox = () => {
         lightBox.style.display = "flex";
@@ -137,9 +171,6 @@ function displayDataPhoto(photographers, allMedias) {
             const closeLightboxButton = document.querySelector(".lightbox__close");
             const nodeMediasToArray = [...imgsAndVids];
             const srcArray = nodeMediasToArray.map(item => item.src);
-            console.log(srcArray); 
-            const next = document.querySelector(".lightbox__next");
-            const prev = document.querySelector(".lightbox__previous");
             imgLightbox.className = 'img__lightbox';
             videoLightbox.className = 'video__lightbox';
             imgLightbox.tabIndex = 0;
@@ -231,4 +262,4 @@ init();
 
 
 
-
+    
