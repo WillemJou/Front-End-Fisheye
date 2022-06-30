@@ -393,6 +393,14 @@ form input {
     background-color: rgba(212, 209, 209, 0.884);
 }
 
+.media__container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto 50px;
+    min-height: 100vh; 
+}
+
 .next__chevron, .prev__chevron, .lightbox__close-img{
     width: 30px;
     height:  30px;
@@ -420,16 +428,9 @@ form input {
    height: 10%;
 }
 
-.lightbox .medias {
+.lightbox img, video {
     max-width: 88%;
     max-height: 100vh;
     margin: auto;
     height: auto;  
 }
-
-
-
-
-
-
-
