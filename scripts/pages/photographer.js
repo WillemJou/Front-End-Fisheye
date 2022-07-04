@@ -144,19 +144,6 @@ function displayDataPhoto(photographers, allMedias) {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-    
     // LIGHTBOX
     // DOM lightbox
 
@@ -168,11 +155,12 @@ function displayDataPhoto(photographers, allMedias) {
     const prev = document.querySelector(".lightbox__previous");
     const closeLightboxButton = document.querySelector(".lightbox__close");
     const mediaContainer = document.querySelector(".media__container");
-    const mediasArray = [...medias];
-    // TABLEAU DES TITRES
-    const linksArray = mediasArray.map(item => item.image || item.video);
-    console.log(linksArray.length);
-    
+    let srcArray = Array.from(
+        imgsAndVids,
+        img => img.getAttribute('src'));
+    let url = window.location.protocol + "//" + window.location.host + "/" ;
+    const addUrlToSrc = srcArray.map(src => url + src);
+
     const displayLightbox = () => {
         lightBox.style.display = "flex";
         lightBox.removeAttribute('aria-hidden');
@@ -187,8 +175,8 @@ function displayDataPhoto(photographers, allMedias) {
     };
     
     const closeEvent = () => {
-         closeLightboxButton.addEventListener('click', () => {
-        closeLightbox();  
+        closeLightboxButton.addEventListener('click', () => {
+            closeLightbox();  
         });
         closeLightboxButton.addEventListener('keydown', (e) => {
             if (e.key === "Enter"){
@@ -199,27 +187,43 @@ function displayDataPhoto(photographers, allMedias) {
                     closeLightbox();
                 };
             });
-    
+            
         });
     };
-    
-    
+
     const loadData = (img) => {
-        img.includes("mp4") ? mediaContainer.innerHTML += `<video id="media_video" src=${img}>` : mediaContainer.innerHTML += `<img id="media_photo" src=${img}>`;
+        console.log(img);
+        img.includes("jpg") ? mediaContainer.innerHTML += `<img id="media_photo" src=${img}>`: mediaContainer.innerHTML += `<video id="media_video" src=${img}>`;
         const mediaVideo = document.getElementById("media_video");
         if (mediaVideo) {
             mediaVideo.setAttribute("controls", true);
             mediaVideo.setAttribute("autoplay", true);
         };
-
-        let nextImg = linksArray.findIndex(item => item.includes(img)) + 1; 
-        console.log(nextImg);
-        if (nextImg === linksArray.length) {
+        
+        
+        const nextFunction = () => {
+            let nextImg = addUrlToSrc.findIndex(item => item === img) + 1; 
+            if (nextImg === addUrlToSrc.length) {
             nextImg = 0;
-        };
-        next.addEventListener('click', () => {
-            loadData(linksArray[nextImg]);
-        });
+            };
+            console.log(nextImg);
+            next.removeEventListener('click', nextFunction);
+            mediaContainer.innerHTML = ``;
+            loadData(addUrlToSrc[nextImg]);
+        };    
+        const prevFunction = () => {
+            let prevImg = addUrlToSrc.findIndex(item => item === img) - 1; 
+            if (prevImg < 0) {
+            prevImg = 10;
+            };
+            console.log(prevImg);
+            prev.removeEventListener('click', prevFunction);
+            mediaContainer.innerHTML = ``;
+            loadData(addUrlToSrc[prevImg]);
+        };    
+        
+        next.addEventListener('click', nextFunction); 
+        prev.addEventListener('click', prevFunction); 
         closeEvent();
     };
     
@@ -229,10 +233,15 @@ function displayDataPhoto(photographers, allMedias) {
             displayLightbox();
             loadData(media);
         });
+        imgAndVid.addEventListener('keydown', (e) => {
+            if (e.key === "Enter"){
+                displayLightbox(); 
+                loadData(media);  
+            };
+        });
     });
 
 };
-
 
 
 

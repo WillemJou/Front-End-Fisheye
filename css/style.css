@@ -399,6 +399,7 @@ form input {
     justify-content: center;
     margin: auto 50px;
     min-height: 100vh; 
+    width: 100vw;
 }
 
 .next__chevron, .prev__chevron, .lightbox__close-img{

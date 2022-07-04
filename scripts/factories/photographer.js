@@ -62,8 +62,8 @@ function photographerFactory(data) {
 function mediaFactory(data) {
     
     const { id, photographerId, title, image, video, likes, date, price} = data;
-    const picture = `assets/Sample Photos/${image}`;
-    const short = `assets/Sample Photos/${video}`;
+    const picture = `assets/SamplePhotos/${image}`;
+    const short = `assets/SamplePhotos/${video}`;
     const heartPng = `assets/images/heart-solid.png`;
     const titlePhoto = document.createElement("h3");
     const layoutPhoto = document.createElement("article");
