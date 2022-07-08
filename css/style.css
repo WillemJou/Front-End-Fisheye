@@ -96,8 +96,6 @@ a{
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    position: absolute;
-    top: 13% ;
 }
 
 #title_modal{
@@ -319,7 +317,7 @@ option {
     color: white;
     padding: 11px;
     width: 160px;
-    height: 5vh;
+    height: 78px;
     border: none;
     background-color: #901C1C;
     border-radius: 5px;
@@ -412,8 +410,8 @@ form input {
     display: flex;
     position: fixed;
     width: 50px;
-    height: 94%;
-    top: 130px;
+    height: 100%;
+    top: 0;
     right: 0;
     cursor: pointer;
     align-items: center;
@@ -434,4 +432,10 @@ form input {
     max-height: 100vh;
     margin: auto;
     height: auto;  
+}
+
+@media screen and (max-width: 690px) {
+    option {
+        font-size: 0.5em;
+    }
 }

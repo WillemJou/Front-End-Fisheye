@@ -39,11 +39,10 @@ function photographerFactory(data) {
         a.setAttribute("href", a)
         article.appendChild(a); 
         a.appendChild(img);
-        a.appendChild(h2);
         article.appendChild(h3);
         article.appendChild(pTagline);
         article.appendChild(pPrice);
-        article.appendChild(descriptifPhotographer);
+        a.appendChild(descriptifPhotographer);
         const sticky = () => {
             const blackHeartPng = `assets/images/heart-black.png`;
             const stickyCard =  document.getElementById('sticky_card');
@@ -52,7 +51,7 @@ function photographerFactory(data) {
             blackHeart.className = 'heart__black';
             stickyCard.append(price, textPrice, blackHeart);
         };
-        descriptifPhotographer.append(h3, pTagline, pPrice);
+        descriptifPhotographer.append(h2, h3, pTagline, pPrice);
         sticky();
         return article;
     };
