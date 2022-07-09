@@ -12,12 +12,14 @@ function displayData(photographers, allMedias) {
     const photographersHeader = document.querySelector(".photographer__header");
     const photographiesSection = document.querySelector(".photographies");
     
-    // récupération parametre id de l'URL
+    // retrieve id parameter from URL
+
     const queryString = window.location.search;                             
     const urlParams = new URLSearchParams(queryString);
     const urlIdParams = urlParams.get ('id');
     
-    // Récupère les datas du photographe selon son ID 
+    // Retrieves the photographer's data according to his ID
+ 
     const findPhotographer = () => {
         const findPhotographer = photographers.find( item => item.id === Number(urlIdParams));
         return findPhotographer;
@@ -28,13 +30,15 @@ function displayData(photographers, allMedias) {
     const userCardDOM = photographerModel.getUserCardDOM();
     photographersHeader.appendChild(userCardDOM);
     
-    // afficher nom dans modal
+    // show name in modal
+
     const titleModal = document.getElementById("title_modal");
     const findName =  findPhotographer().name;
     titleModal.append(findName);
 
-     // affichage des medias
-    const mediasDisplay = () => {
+     // media display
+
+    let mediasDisplay = () => {
         photographiesSection.innerHTML =``;
         medias.forEach((media) => {
         const mediaModel = mediaFactory(media); 
@@ -76,81 +80,81 @@ function displayData(photographers, allMedias) {
         });
     };
     incrementationLikes();
-        
-        //likes sum 
-        const likesArray = document.querySelectorAll(".like");
-        const firstTotalValues = [...likesArray].map(item => Number(item.innerHTML)).reduce((acc, cur) => cur + acc, 0);
-        totalPriceContainer.append(firstTotalValues);
-        
-        const totalSum = () => {
-            const values = [...likesArray].map(item => Number(item.innerHTML)).reduce((acc, cur) => cur + acc, 0);
-            totalPriceContainer.innerHTML="";
-            totalPriceContainer.append(values);
-        };
+
+    //likes sum 
+    const likesArray = document.querySelectorAll(".like");
+    const firstTotalValues = [...likesArray].map(item => Number(item.innerHTML)).reduce((acc, cur) => cur + acc, 0);
+    totalPriceContainer.append(firstTotalValues);
     
-    // LIGHTBOX
-    // DOM lightbox
-    const imgsAndVids = document.querySelectorAll(".medias");
-    const lightBox = document.getElementById("lb_display");
-    const next = document.querySelector(".lightbox__next");
-    const prev = document.querySelector(".lightbox__previous");
-    prev.tabIndex = 0; 
-    next.tabIndex = 0;
-    const closeLightboxButton = document.querySelector(".lightbox__close");
-    const mediaContainer = document.querySelector(".media__container");
-    let srcArray = Array.from(
-        imgsAndVids,
-        img => img.getAttribute('src')
-    );
-    let url = window.location.protocol + "//" + window.location.host + "/" ;
-    const addUrlToSrc = srcArray.map(src => url + src);
-        
-    const displayLightbox = () => {
-            lightBox.style.display = "flex";
-            lightBox.removeAttribute('aria-hidden');
-            lightBox.setAttribute('aria-modal', true);
-            main.setAttribute('aria-hidden', true);
-            document.body.style.overflow = "hidden"; 
-    };
-        
-    const closeLightbox =  () => {
-            lightBox.style.display = "none";
-            main.setAttribute('aria-hidden', false);
-            lightBox.removeAttribute('aria-modal');
-            lightBox.setAttribute('aria-hidden', true);
-            mediaContainer.innerHTML=``;
-            document.body.style.overflow = "visible";
-    };
-        
-    const closeEvent = () => {
-        closeLightboxButton.addEventListener('click', () => {
-            closeLightbox();  
-        });
-        closeLightboxButton.addEventListener('keydown', (e) => {
-            if (e.key === "Enter"){
-                closeLightbox();   
-            };
-             window.addEventListener("keydown", (e) => {
-                if (e.key === "Escape"){
-                    closeLightbox();
-                };
-            });
-                
-        });
-    };
-        
-    const loadData = (media) => {
-        media.includes("jpg") ? mediaContainer.innerHTML += `<img id="media_photo" src=${media}>`: mediaContainer.innerHTML += `<video id="media_video" src=${media}>`;
-        const mediaVideo = document.getElementById("media_video");
-        const mediaPhoto = document.getElementById("media_photo");
-        if (mediaVideo) {
-            mediaVideo.setAttribute("controls", true);
-            mediaVideo.setAttribute("autoplay", true);
-            mediaVideo.tabIndex = 0;
-            mediaVideo.focus();
+    const totalSum = () => {
+        const values = [...likesArray].map(item => Number(item.innerHTML)).reduce((acc, cur) => cur + acc, 0);
+        totalPriceContainer.innerHTML="";
+        totalPriceContainer.append(values);
         };
-        if (mediaPhoto) {
-            mediaPhoto.tabIndex = 0;
+        
+        // LIGHTBOX
+        // DOM lightbox
+        const imgsAndVids = document.querySelectorAll(".medias");
+        const lightBox = document.getElementById("lb_display");
+        const next = document.querySelector(".lightbox__next");
+        const prev = document.querySelector(".lightbox__previous");
+        prev.tabIndex = 0; 
+        next.tabIndex = 0;
+        const closeLightboxButton = document.querySelector(".lightbox__close");
+        const mediaContainer = document.querySelector(".media__container");
+        let srcArray = Array.from(
+            imgsAndVids,
+            img => img.getAttribute('src')
+            );
+            let url = window.location.protocol + "//" + window.location.host + "/" ;
+            const addUrlToSrc = srcArray.map(src => url + src);
+        
+            const displayLightbox = () => {
+                lightBox.style.display = "flex";
+                lightBox.removeAttribute('aria-hidden');
+                lightBox.setAttribute('aria-modal', true);
+                main.setAttribute('aria-hidden', true);
+                document.body.style.overflow = "hidden"; 
+            };
+            
+            const closeLightbox =  () => {
+                lightBox.style.display = "none";
+                main.setAttribute('aria-hidden', false);
+                lightBox.removeAttribute('aria-modal');
+                lightBox.setAttribute('aria-hidden', true);
+                mediaContainer.innerHTML=``;
+                document.body.style.overflow = "visible";
+            };
+            
+            const closeEvent = () => {
+                closeLightboxButton.addEventListener('click', () => {
+                    closeLightbox();  
+                });
+                closeLightboxButton.addEventListener('keydown', (e) => {
+                    if (e.key === "Enter"){
+                        closeLightbox();   
+                    };
+                    window.addEventListener("keydown", (e) => {
+                        if (e.key === "Escape"){
+                            closeLightbox();
+                        };
+                    });
+                    
+                });
+            };
+            
+            const loadData = (media) => {
+                media.includes("jpg") ? mediaContainer.innerHTML += `<img id="media_photo" src=${media}>`: mediaContainer.innerHTML += `<video id="media_video" src=${media}>`;
+                const mediaVideo = document.getElementById("media_video");
+                const mediaPhoto = document.getElementById("media_photo");
+                if (mediaVideo) {
+                    mediaVideo.setAttribute("controls", true);
+                    mediaVideo.setAttribute("autoplay", true);
+                    mediaVideo.tabIndex = 0;
+                    mediaVideo.focus();
+                };
+                if (mediaPhoto) {
+                    mediaPhoto.tabIndex = 0;
             mediaPhoto.focus();
         }     
 
@@ -172,24 +176,24 @@ function displayData(photographers, allMedias) {
             mediaContainer.innerHTML = ``;
             loadData(addUrlToSrc[prevImg]);
         };    
-    next.addEventListener('click', nextFunction); 
-    prev.addEventListener('click', prevFunction); 
-    closeEvent();
+        next.addEventListener('click', nextFunction); 
+        prev.addEventListener('click', prevFunction); 
+        closeEvent();
     };
     
-    const displayLightBoxEvents = () => {
+    let displayLightBoxEvents = (e) => {
         [...imgsAndVids].forEach(imgAndVid => {
-        const media = imgAndVid.src;
-        imgAndVid.addEventListener('click', () => {
-            displayLightbox();
-            loadData(media);
-        });
-        imgAndVid.addEventListener('keydown', (e) => {
-            if (e.key === "Enter"){
-                displayLightbox(); 
-                loadData(media);  
-            };
-        });
+            const media = imgAndVid.src;
+            imgAndVid.addEventListener('click', () => {
+                displayLightbox();
+                loadData(media);
+            });
+            imgAndVid.addEventListener('keydown', () => {
+                if (e.key === "Enter"){
+                    displayLightbox(); 
+                    loadData(media);  
+                };
+            });
         });
     };
     displayLightBoxEvents();
@@ -207,21 +211,21 @@ function displayData(photographers, allMedias) {
         isOpen();
     });
     
-    // trie selon pop, date, titre
-    selectFilterContainer.addEventListener('change', (e) => {
-        const choice = e.target.value;
-        incrementationLikes();
-        displayLightBoxEvents();
+    // sort by pop, date, title
+
+    
+        selectFilterContainer.addEventListener('change', (e) => {
         
-        switch (choice) {
-            case 'popularité':
+            const choice = e.target.value;
+    
+            switch (choice) {
+                case 'popularité':
                 medias.sort((a, b) => {
                     if (a.likes < b.likes) return 1;
                     if (a.likes > b.likes) return -1;
                     return 0;
                 });
                 break;
-                
                 case 'date':
                     medias.sort((a, b) => {
                         if (a.date < b.date) return 1;
@@ -229,7 +233,6 @@ function displayData(photographers, allMedias) {
                         return 0;
                     });
                     break;
-                    
                     case 'titre':
                         medias.sort((a, b) => {
                             if (a.title < b.title) return -1;
@@ -238,13 +241,16 @@ function displayData(photographers, allMedias) {
                         });				
                         break;
                     };
-                    mediasDisplay();
-    });
-};
+                    mediasDisplay(e);
+                    displayLightBoxEvents();
+                    incrementationLikes();
+        });
+        
+    };
             
 
 async function init() {
-    // Récupère les datas  
+    // retrieve DATA
     const datas = await getPhotographers();
     const photographers = datas.photographers;
     const allmedias = datas.medias;

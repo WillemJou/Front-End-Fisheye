@@ -18,7 +18,8 @@ function photographerFactory(data) {
     
     
     
-    //liens homepage vers page photographe
+    //homepage links to photographer page
+
     const links = () =>{
         a.href = URL;
     };

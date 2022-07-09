@@ -6,7 +6,8 @@ const modal = document.getElementsByClassName("modal");
 const sendButton = document.getElementById("send__button");
 const form = document.getElementById("modal_form");
 const label = document.querySelector(".filter__container");
-// pour console log des input 
+// for input log console
+ 
 const first = document.getElementById('input_prénom');
 const last = document.getElementById('input_nom');
 const email = document.getElementById('input_email');
@@ -35,14 +36,14 @@ function closeModal() {
     document.body.style.overflow = "visible";
 };
 
-//fermer modal ac ECHAP
+//close modal ac ESCAPE
 window.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
         closeModal(e);              
     };
 });
 
-// affiche les entrées des input quand soumission formulaire
+// show input entries when form submission
 form.onsubmit = () => {
     console.log("prénom", first.value);
     console.log("nom", last.value);
