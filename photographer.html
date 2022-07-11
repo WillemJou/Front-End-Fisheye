@@ -39,48 +39,48 @@
       </div>
     </aside>
     <header class="header__page">
-     <a href="index.html"><img src="assets/images/logo.png" alt="Fish Eye Page d'accueil" class="logo" /></a>
+      <a href="index.html"><img src="assets/images/logo.png" alt="Fish Eye Page d'accueil" class="logo" /></a>
     </header>
     <main id="main" aria-hidden="false">
       <div class="photographer__header">
-        <button id="open_modal_button" class="contact__button" aria-label="Contactez-moi" onclick="displayModal()">Contactez-moi</button>
       </div>
       <label name="menu de sélection" id="filter" class="filters">Trier par
         <div class="filter__container">
-        <select name="Par ordre de"  id="filter_categories" class="filter__categories">
-          <option value="popularité" class="pop option">
-            Popularité 
-          </option>
-          <option value="date" class="date option">
-            Date
-          </option>
-          <option value="titre" class="title option">
-            Titre
-          </option>
-        </select>
-        <img src="assets/images/chevron-down-solid.png" class="chevron-down" alt="sélectionner le filtre souhaité"/>
-        <img src="assets/images/chevron-up-solid.png" class="chevron-up" alt="sélectionner le filtre souhaité"/>
-      </div>
+          <select name="Par ordre de"  id="filter_categories" class="filter__categories">
+            <option value="popularité" class="pop option">
+              Popularité 
+            </option>
+            <option value="date" class="date option">
+              Date
+            </option>
+            <option value="titre" class="title option">
+              Titre
+            </option>
+          </select>
+          <img src="assets/images/chevron-down-solid.png" class="chevron-down" alt="sélectionner le filtre souhaité"/>
+          <img src="assets/images/chevron-up-solid.png" class="chevron-up" alt="sélectionner le filtre souhaité"/>
+        </div>
       </label>
       <section class="photographies">
       </section>
       <aside class="sticky__card" id="sticky_card">
       </aside>
     </main>
-    <article class="lightbox" id="lb_display" aria-hidden="true" aria-label="image en vue rapprochée" role="dialog" aria-describedby="LightBox" >
-      <div class="media__container"></div>
-      <button class="lightbox__previous">
-        <img class="prev__chevron" src="assets/images/chevron-prev.png" alt=""></button>
-        <button class="lightbox__next">
-          <img class="next__chevron" src="assets/images/chevron-next.png" alt=""></button>
-          <button class="lightbox__close">
-            <img class="lightbox__close-img" src="assets/images/close.png"></button>
+    <button id="open_modal_button" class="contact__button" aria-label="Contactez-moi" onclick="displayModal()">Contactez-moi</button>
+  <article class="lightbox" id="lb_display" aria-hidden="true" aria-label="image en vue rapprochée" role="dialog" aria-describedby="LightBox" >
+    <div class="media__container"></div>
+    <button class="lightbox__previous">
+      <img class="prev__chevron" src="assets/images/chevron-prev.png" alt=""></button>
+      <button class="lightbox__next">
+        <img class="next__chevron" src="assets/images/chevron-next.png" alt=""></button>
+        <button class="lightbox__close">
+          <img class="lightbox__close-img" src="assets/images/close.png"></button>
           
-          </article>
-          
-          <script src="scripts/factories/photographer.js"></script>
-          <script src="scripts/pages/photographer.js"></script>
-          <script src="scripts/utils/contactForm.js"></script>
-        </body>
-        </html>
+        </article>
+        
+        <script src="scripts/factories/photographer.js"></script>
+        <script src="scripts/pages/photographer.js"></script>
+        <script src="scripts/utils/contactForm.js"></script>
+      </body>
+      </html>
         

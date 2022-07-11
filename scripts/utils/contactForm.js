@@ -6,6 +6,7 @@ const modal = document.getElementsByClassName("modal");
 const sendButton = document.getElementById("send__button");
 const form = document.getElementById("modal_form");
 const label = document.querySelector(".filter__container");
+
 // for input log console
  
 const first = document.getElementById('input_prénom');
@@ -18,6 +19,7 @@ function displayModal() {
     button.style.visibility = "hidden";
     label.style.visibility ="hidden";
     chevron.style.visibility ="hidden";
+   // stickyCard.style.display ="none";
     contactModal.setAttribute('aria-modal', "true" );
     contactModal.removeAttribute('aria-hidden');
     document.body.style.overflow = "hidden";
@@ -30,13 +32,14 @@ function closeModal() {
         chevron.style.visibility = "visible"
         contactModal.style.display = "none"
         label.style.visibility ="visible";
+        //stickyCard.style.display ="block";
     }, 500);
     contactModal.setAttribute('aria-hidden', "true" );
     contactModal.removeAttribute('aria-modal');
     document.body.style.overflow = "visible";
 };
 
-//close modal ac ESCAPE
+//close modal with ESCAPE
 window.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
         closeModal(e);              
@@ -50,6 +53,8 @@ form.onsubmit = () => {
     console.log("email", email.value);
         return false;
 };
+
+
 
 
 

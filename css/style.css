@@ -101,11 +101,6 @@ a{
 #title_modal{
     margin-top: 0;  
 }
-#open_modal_button{
-    position: absolute;
-    top: 173px;
-    left: 50%;
-}
 .photographer__header article {
     width: 100% ;
 }
@@ -132,9 +127,6 @@ select {
    padding: 9px 35px 10px 25px;
    font-weight: normal;
    color: #FAFAFA;
-   max-height: 37px;
-   overflow: hidden;
-   transition: 1s max-height 0.3s;
    cursor: pointer;
    z-index: 0;
 }
@@ -149,9 +141,6 @@ select {
     border-radius: 5px;
     font-weight: normal;
     color: #FAFAFA;
-    max-height: 37px;
-    overflow: hidden;
-    transition: 1s max-height 0.3s;
     cursor: pointer;
     position: relative;
     z-index: 0;
@@ -162,10 +151,11 @@ select {
     border-bottom: 1px solid #FAFAFA;
 }
 
-option {
+.option {
     padding: 15px 0 10px 15px;
     border-radius: 5px;
     border-bottom: 1px solid #FAFAFA;
+    width: 32px;
 }
 
 .title{
@@ -188,7 +178,7 @@ option {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 60px;
-    margin: 50px 60px;
+    margin: 50px 100px;
 }
 
 .like__container{
@@ -209,8 +199,8 @@ option {
     flex-direction: column;
 }
 .photographies .medias {
-    height: 100%;
-    width: 100%;
+    height: 88%;
+    max-width: 100%;
     object-fit: cover;
     border-radius: 5px;
     cursor: pointer;
@@ -258,9 +248,10 @@ option {
     position: sticky;
     z-index: 1;
     padding : 13px 25px 3px 0px;
+    margin-right: 100px;
     width: 178px;
     height: 29px;
-    left: 83%;
+    left: 100%;
     bottom: 0;
     background-color: #DB8876;
     border-radius: 5px;
@@ -297,6 +288,7 @@ option {
     animation: open-slide .5s;
 }
 
+
 #contact_modal[aria-hidden="true"] .modal {
     animation: close-slide .6s;
 }
@@ -309,7 +301,11 @@ option {
     from { transform: translateY(0);}
     to { transform: translateY(-50%);}
 }
-
+#open_modal_button {
+    position: absolute;
+    top: 173px;
+    left: 50%;
+}
 
 .contact__button {
     font-size: 20px;
@@ -317,7 +313,7 @@ option {
     color: white;
     padding: 11px;
     width: 160px;
-    height: 78px;
+    height: 60px;
     border: none;
     background-color: #901C1C;
     border-radius: 5px;
@@ -427,15 +423,96 @@ form input {
    height: 10%;
 }
 
-.lightbox img, video {
+.lightbox img, .lightbox video {
     max-width: 88%;
-    max-height: 100vh;
+    max-height: 90vh;
     margin: auto;
     height: auto;  
 }
 
-@media screen and (max-width: 690px) {
-    option {
-        font-size: 0.5em;
+
+
+@media screen and (max-width: 988px) {
+    .photographies {
+     display: grid;
+     grid-template-columns: 1fr 1fr;
+     gap: 60px;
+     margin: 50px 100px;
+    }
+     .layout__video, .layout__photo {
+         width: 100%;
+         height: 88%;
+    }
+    #open_modal_button  {
+        padding: 11px;
+        width: 168px;
+        height: 43px;
+        left: 0;
+        bottom: 0;
+        margin-left: 100px;
+        position: sticky;
     }
 }
+@media screen and (max-width: 630px) {
+    .photographer__header a {
+        align-items: center; 
+        flex-direction: column;
+    }
+    #title_modal  {
+        font-size: 2rem;
+    }
+    .modal img {
+        width: 20px;
+    }
+    .photographer__header img {
+        width: 130px;
+        height: 130px;
+    }
+    .header__page {
+        justify-content: center;
+    }
+    .logo {
+        margin-left: 0;
+        margin-right: 0;
+    }
+    
+    .photographer__header .descriptif__photographer{
+        align-items: center;
+    }
+    .photographies {
+        display: flex;
+        flex-direction: column;
+    }
+    #open_modal_button  {
+        left: 100%;
+        bottom: 47px;
+        margin-right: 115px;
+    }
+}
+@media screen and (max-width: 397px) {
+    
+    #open_modal_button, .sticky__card {
+        margin: 20px;
+   }
+
+    #filter {
+        flex-direction: column;
+        margin-left: 10px;
+    }
+
+    .filter__container {
+        margin-top: 10px;
+        display: block;
+        width: 32%;
+    }
+    .photographer__header, .logo {
+        margin: 10px;
+    }
+    .photographies {
+        margin: 30px;
+        gap: 0;
+    }
+    
+}
+
+   

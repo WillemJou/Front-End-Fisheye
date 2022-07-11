@@ -16,8 +16,6 @@ function photographerFactory(data) {
     const commaSpace = ", ";
     const idPhotographers = id;
     
-    
-    
     //homepage links to photographer page
 
     const links = () =>{
@@ -45,8 +43,8 @@ function photographerFactory(data) {
         article.appendChild(pPrice);
         a.appendChild(descriptifPhotographer);
         const sticky = () => {
-            const blackHeartPng = `assets/images/heart-black.png`;
             const stickyCard =  document.getElementById('sticky_card');
+            const blackHeartPng = `assets/images/heart-black.png`;
             const blackHeart = document.createElement("img");
             blackHeart.setAttribute("src", blackHeartPng);
             blackHeart.className = 'heart__black';
