@@ -132,13 +132,13 @@ function displayData(photographers, allMedias) {
                     if (e.key === "Enter"){
                         closeLightbox();   
                     };
+                });
                     window.addEventListener("keydown", (e) => {
                         if (e.key === "Escape"){
                             closeLightbox();
                         };
                     });
                     
-                });
             };
             
             const loadData = (media, title) => {
@@ -151,13 +151,12 @@ function displayData(photographers, allMedias) {
                     mediaVideo.setAttribute("alt", title);
                     mediaVideo.tabIndex = 0;
                     mediaVideo.focus();
-                   
                 };
                 if (mediaPhoto) {
                     mediaPhoto.tabIndex = 0;
                     mediaPhoto.setAttribute("alt", title);
                     mediaPhoto.focus();
-                }     
+                };     
                 
                 const nextFunction = () => {
                     let nextImg = addUrlToSrc.findIndex(item => item === media) + 1; 
@@ -168,19 +167,34 @@ function displayData(photographers, allMedias) {
                     mediaContainer.innerHTML = ``;
                     loadData(addUrlToSrc[nextImg]);
                 };    
+                next.addEventListener('click', nextFunction); 
+
                 const prevFunction = () => {
                     let prevImg = addUrlToSrc.findIndex(item => item === media) - 1; 
                     if (prevImg < 0) {
-                prevImg = 10;
+                    prevImg = 10;
+                    };
+
+                prev.removeEventListener('click', prevFunction);
+                mediaContainer.innerHTML = ``;
+                loadData(addUrlToSrc[prevImg]);
+                };    
+                prev.addEventListener('click', prevFunction); 
+            
+                window.addEventListener("keydown", (e) => {
+                    switch (e.key) {
+                        case "ArrowLeft" :
+                            prevFunction();
+                            break;
+                        case "ArrowRight" :
+                            nextFunction();
+                            break;
+                        default : 
+                            return;
+                    }
+                });
+                closeEvent();
             };
-            prev.removeEventListener('click', prevFunction);
-            mediaContainer.innerHTML = ``;
-            loadData(addUrlToSrc[prevImg]);
-        };    
-        next.addEventListener('click', nextFunction); 
-        prev.addEventListener('click', prevFunction); 
-        closeEvent();
-    };
     
     let displayLightBoxEvents = (e) => {
         [...imgsAndVids].forEach(imgAndVid => {
