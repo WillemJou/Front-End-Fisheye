@@ -17,7 +17,6 @@ function photographerFactory(data) {
     const idPhotographers = id;
     
     //homepage links to photographer page
-
     const links = () =>{
         a.href = URL;
     };

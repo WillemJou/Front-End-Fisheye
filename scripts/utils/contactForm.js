@@ -6,20 +6,21 @@ const modal = document.getElementsByClassName("modal");
 const sendButton = document.getElementById("send__button");
 const form = document.getElementById("modal_form");
 const label = document.querySelector(".filter__container");
+const chevronDown = document.querySelector(".chevron-down");
+const chevronUp = document.querySelector(".chevron-up");
 
 // for input log console
  
 const first = document.getElementById('input_prénom');
 const last = document.getElementById('input_nom');
 const email = document.getElementById('input_email');
-const chevron = document.querySelector(".chevron-down")
 
 function displayModal() {
 	contactModal.style.display = "flex";
     button.style.visibility = "hidden";
     label.style.visibility ="hidden";
-    chevron.style.visibility ="hidden";
-   // stickyCard.style.display ="none";
+    chevronUp.style.visibility ="hidden";
+    chevronDown.style.visibility ="hidden";
     contactModal.setAttribute('aria-modal', "true" );
     contactModal.removeAttribute('aria-hidden');
     document.body.style.overflow = "hidden";
@@ -28,11 +29,10 @@ function displayModal() {
 
 function closeModal() {
     window.setTimeout(() => {
-        button.style.visibility = "visible"
-        chevron.style.visibility = "visible"
-        contactModal.style.display = "none"
+        button.style.visibility = "visible";
+        chevronDown.style.visibility = "visible";
+        contactModal.style.display = "none";
         label.style.visibility ="visible";
-        //stickyCard.style.display ="block";
     }, 500);
     contactModal.setAttribute('aria-hidden', "true" );
     contactModal.removeAttribute('aria-modal');
