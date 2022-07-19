@@ -9,42 +9,42 @@
     <title>Fisheye - photographe </title>
   </head>
   <body>
-    <aside id="contact_modal" aria-hidden="true" role="dialog" aria-labelledby="title_modal">
+    <div id="contact_modal" aria-hidden="true" role="dialog" aria-labelledby="title_modal">
       <div class="modal">
         <header>
           <div class="title-modal__layout">
             <h2 id="title_modal">Contactez-moi <br> </h2>
-            <img src="assets/icons/close.svg" aria-label="Fermer le formulaire de contact" onclick="closeModal()" />
+            <img src="assets/icons/close.svg" aria-label="Fermer le formulaire de contact" alt="croix de fermeture" onclick="closeModal()" />
           </div>
         </header>
         <form id="modal_form" method="get"  >
           <div>
-            <label id="prénom" for="prénom">Prénom</label>
+            <label id="prénom" for="input_prénom">Prénom</label>
             <input id="input_prénom" autocomplete="off" aria-labelledby="prénom" type="text"  minlength="2" required  />
           </div>
           <div>
-            <label id="nom" for="nom">Nom</label>
+            <label id="nom" for="input_nom">Nom</label>
             <input id="input_nom" autocomplete="off" aria-labelledby="nom" type="text" minlength="2" required />
           </div>
           <div>
-            <label id="email" for="email">Email</label>
+            <label id="email" for="input_email">Email</label>
             <input id="input_email" autocomplete="off" aria-labelledby="email" type="email" required  />
           </div>
           <div>
-            <label id="message"  for="votre message">Votre message</label>
+            <label id="message"  for="input_message">Votre message</label>
             <input id="input_message" autocomplete="off" aria-labelledby="message" class="message__input" />
           </div>
           <button id="send_button" type="submit" aria-label="Envoyer" class="contact__button">Envoyer</button>
         </form>
       </div>
-    </aside>
+    </div>
     <header class="header__page">
       <a href="index.html"><img src="assets/images/logo.png" alt="Fish Eye Page d'accueil" class="logo" /></a>
     </header>
     <main id="main" aria-hidden="false">
       <div class="photographer__header">
       </div>
-      <label name="menu de sélection" id="filter" class="filters">Trier par
+      <label id="filter" class="filters">Trier par
         <div class="filter__container">
           <select name="Par ordre de"  id="filter_categories" class="filter__categories">
             <option value="popularité" class="pop option">
@@ -67,16 +67,16 @@
       </aside>
     </main>
     <button id="open_modal_button" class="contact__button" aria-label="Contactez-moi" onclick="displayModal()">Contactez-moi</button>
-  <article class="lightbox" id="lb_display" aria-hidden="true" aria-label="image en vue rapprochée" role="dialog" aria-describedby="LightBox" >
+  <div class="lightbox" id="lb_display" aria-hidden="true" aria-label="image en vue rapprochée" role="dialog">
     <div class="media__container"></div>
     <button class="lightbox__previous">
       <img class="prev__chevron" src="assets/images/chevron-prev.png" alt=""></button>
       <button class="lightbox__next">
         <img class="next__chevron" src="assets/images/chevron-next.png" alt=""></button>
         <button class="lightbox__close">
-          <img class="lightbox__close-img" src="assets/images/close.png"></button>
+          <img class="lightbox__close-img" alt="croix de fermeture" src="assets/images/close.png"></button>
           
-        </article>
+        </div>
         
         <script src="scripts/factories/photographer.js"></script>
         <script src="scripts/pages/photographer.js"></script>

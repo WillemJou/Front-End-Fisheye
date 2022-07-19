@@ -124,11 +124,11 @@ function displayData(photographers, allMedias) {
                     mediaVideo.setAttribute("controls", true);
                     mediaVideo.setAttribute("autoplay", true);
                     mediaVideo.setAttribute("alt", title);
-                    mediaVideo.tabIndex = 0;
+                    mediaVideo.tabIndex = 3;
                     mediaVideo.focus();
                 };
                 if (mediaPhoto) {
-                    mediaPhoto.tabIndex = 0;
+                    mediaPhoto.tabIndex = 3;
                     mediaPhoto.setAttribute("alt", title);
                     mediaPhoto.focus();
                 };     
@@ -294,7 +294,6 @@ function displayData(photographers, allMedias) {
                         generalFunction();
     });
 };
-            
 
 async function init() {
     // retrieve DATA

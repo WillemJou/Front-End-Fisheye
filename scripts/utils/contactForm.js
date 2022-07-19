@@ -9,6 +9,8 @@ const label = document.querySelector(".filter__container");
 const chevronDown = document.querySelector(".chevron-down");
 const chevronUp = document.querySelector(".chevron-up");
 
+button.tabIndex = 0 ;   
+
 // for input log console
  
 const first = document.getElementById('input_prénom');
@@ -45,12 +47,6 @@ window.addEventListener("keydown", (e) => {
         closeModal(e);              
     };
 });
-
-const validateEmail = (email) => {
-    // regex email
-    let emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return (emailPattern.test(email.value));
-    };
 
 // show input entries when form submission
 form.onsubmit = () => {
