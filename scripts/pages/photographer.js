@@ -115,33 +115,9 @@ function displayData(photographers, allMedias) {
                 document.body.style.overflow = "hidden"; 
             };
             
-            const closeLightbox =  () => {
-                lightBox.style.display = "none";
-                main.setAttribute('aria-hidden', false);
-                lightBox.removeAttribute('aria-modal');
-                lightBox.setAttribute('aria-hidden', true);
-                mediaContainer.innerHTML=``;
-                document.body.style.overflow = "visible";
-            };
-            
-            const closeEvent = () => {
-                closeLightboxButton.addEventListener('click', () => {
-                    closeLightbox();  
-                });
-                closeLightboxButton.addEventListener('keydown', (e) => {
-                    if (e.key === "Enter"){
-                        closeLightbox();   
-                    };
-                });
-                    window.addEventListener("keydown", (e) => {
-                        if (e.key === "Escape"){
-                            closeLightbox();
-                        };
-                    });
-                    
-            };
             
             const loadData = (media, title) => {
+                mediaContainer.innerHTML = ``;
                 media.includes("jpg") ? mediaContainer.innerHTML += `<img id="media_photo" src=${media}>`: mediaContainer.innerHTML += `<video id="media_video" src=${media}>`;
                 const mediaVideo = document.getElementById("media_video");
                 const mediaPhoto = document.getElementById("media_photo");
@@ -158,62 +134,102 @@ function displayData(photographers, allMedias) {
                     mediaPhoto.focus();
                 };     
                 
+                const closeLightbox =  (e) => {
+                    lightBox.style.display = "none";
+                    main.setAttribute('aria-hidden', false);
+                    lightBox.removeAttribute('aria-modal');
+                    lightBox.setAttribute('aria-hidden', true);
+                    mediaContainer.innerHTML=``;
+                    document.body.style.overflow = "visible";
+                    document.removeEventListener('click', closeEventOnClick);
+                    document.removeEventListener('click', closeEventOnKey);
+                    prev.removeEventListener('click', prevFunction, true);
+                    next.removeEventListener('click', nextFunction, true);
+                    window.removeEventListener('keydown', arrowEvent);
+                };
+                
+                const closeEventOnClick = (e) => {
+                    closeLightboxButton.addEventListener('click', (e) => {
+                        closeLightbox(e);  
+                    });
+                };
+                const closeEventOnKey = () => {
+                    closeLightboxButton.addEventListener('keydown', (e) => {
+                        if (e.key === "Enter"){
+                            closeLightbox(e);  
+                        };
+                    });
+                    window.addEventListener("keydown", (e) => {
+                        if (e.key === "Escape"){
+                            closeLightbox(e);
+                        };
+                    });    
+                };
                 const nextFunction = () => {
-                    let nextImg = addUrlToSrc.findIndex(item => item === media) + 1; 
-                    if (nextImg === addUrlToSrc.length) {
-                        nextImg = 0;
+                    let nextImg = addUrlToSrc.findIndex(item => item === media); 
+                    if (nextImg === addUrlToSrc.length - 1) {
+                        nextImg = - 1;
                     };
-                    next.removeEventListener('click', nextFunction);
-                    mediaContainer.innerHTML = ``;
-                    loadData(addUrlToSrc[nextImg]);
-                };    
-                next.addEventListener('click', nextFunction); 
-
+                    loadData(addUrlToSrc[nextImg + 1]);
+                    next.removeEventListener('click', nextFunction, true);
+                    prev.removeEventListener('click', prevFunction, true);
+                    window.removeEventListener('keydown', arrowEvent);
+                    console.log(nextImg);
+                };   
+                
                 const prevFunction = () => {
-                    let prevImg = addUrlToSrc.findIndex(item => item === media) - 1; 
-                    if (prevImg < 0) {
-                    prevImg = 10;
+                    let prevImg = addUrlToSrc.findIndex(item => item === media); 
+                    if (prevImg === 0) {
+                        prevImg = addUrlToSrc.length ;
                     };
-
-                prev.removeEventListener('click', prevFunction);
-                mediaContainer.innerHTML = ``;
-                loadData(addUrlToSrc[prevImg]);
+                    loadData(addUrlToSrc[prevImg - 1]);
+                    prev.removeEventListener('click', prevFunction, true);
+                    next.removeEventListener('click', nextFunction, true);
+                    window.removeEventListener('keydown', arrowEvent);
+                    console.log(prevImg);
+                    
                 };    
-                prev.addEventListener('click', prevFunction); 
-            
-                window.addEventListener("keydown", (e) => {
+                
+                // switch case for arrow prev and next functions
+                const arrowEvent = (e) => {
+                    
                     switch (e.key) {
                         case "ArrowLeft" :
                             prevFunction();
                             break;
-                        case "ArrowRight" :
-                            nextFunction();
-                            break;
-                        default : 
-                            return;
-                    }
-                });
-                closeEvent();
+                            case "ArrowRight" :
+                                nextFunction();
+                                break;
+                                default : 
+                                return;
+                            }
+                        };
+                // navigate and close lightbox event
+                next.addEventListener('click', nextFunction, true); 
+                prev.addEventListener('click', prevFunction, true);
+                window.addEventListener("keydown", arrowEvent);
+                closeEventOnClick();
+                closeEventOnKey();
             };
     
-    let displayLightBoxEvents = (e) => {
-        [...imgsAndVids].forEach(imgAndVid => {
-            const media = imgAndVid.src;
-            const title = imgAndVid.alt;
+        let displayLightBoxEvents = (e) => {
+            [...imgsAndVids].forEach(imgAndVid => {
+                const media = imgAndVid.src;
+                const title = imgAndVid.alt;
 
-            imgAndVid.addEventListener('click', () => {
-                displayLightbox();
-                loadData(media, title);
+                imgAndVid.addEventListener('click', () => {
+                    displayLightbox();
+                    loadData(media, title);
+                });
+                imgAndVid.addEventListener('keydown', (e) => {
+                    if (e.key === "Enter"){
+                        displayLightbox(); 
+                        loadData(media, title);  
+                    };
+                });
             });
-            imgAndVid.addEventListener('keydown', (e) => {
-                if (e.key === "Enter"){
-                    displayLightbox(); 
-                    loadData(media, title);  
-                };
-            });
-        });
-    };
-    displayLightBoxEvents();
+        };
+        displayLightBoxEvents();
     
         // chevron filter
         const selectFilterContainer = document.querySelector("#filter");
@@ -223,31 +239,40 @@ function displayData(photographers, allMedias) {
         let open = false;
     
         const isOpen = () => {
-            open ? (chevronUp.style.visibility ="visible") (chevronDown.style.visibility ="hidden") : (chevronDown.style.visibility ="visible") (chevronUp.style.visibility ="hidden");        
-        };
+            if (open === true){
+                chevronUp.style.visibility ="visible";
+                chevronDown.style.visibility ="hidden";
+            }
+            else {
+                chevronDown.style.visibility ="visible";
+                chevronUp.style.visibility ="hidden";        
+            };
+        };    
         selectFilterContainer.addEventListener("click", () => {
             open = !open;
             isOpen();
         });
-        pop.addEventListener("click", popSort = () => {
-            medias.sort((a, b) => {
-                if (a.likes < b.likes) return 1;
-                if (a.likes > b.likes) return -1;
-                return 0;
-            });
+    };
+
+    popSort = () => {
+        medias.sort((a, b) => {
+            if (a.likes < b.likes) return 1;
+            if (a.likes > b.likes) return -1;
+            return 0;
         });
     };
-    mediasDisplay();
-    generalFunction(); 
-
+    mediasDisplay(popSort());
+    generalFunction();
+    
     // sort by pop, date, title
     const selectFilterContainer = document.querySelector("#filter");
-            selectFilterContainer.addEventListener('change', (e) => {
-            
-                const choice = e.target.value;
-    
-                switch (choice) {
-                    case 'popularité':
+    selectFilterContainer.addEventListener('change', (e) => {
+        
+        const choice = e.target.value;
+        
+        switch (choice) {
+            case 'popularité':
+                    generalFunction(); 
                     popSort();
                     break;
                     

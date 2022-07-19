@@ -47,6 +47,7 @@ function photographerFactory(data) {
             const blackHeart = document.createElement("img");
             blackHeart.setAttribute("src", blackHeartPng);
             blackHeart.className = 'heart__black';
+            blackHeart.setAttribute("alt", "nombre total de likes");
             stickyCard.append(price, textPrice, blackHeart);
         };
         descriptifPhotographer.append(h2, h3, pTagline, pPrice);

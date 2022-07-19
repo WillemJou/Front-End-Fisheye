@@ -46,13 +46,21 @@ window.addEventListener("keydown", (e) => {
     };
 });
 
+const validateEmail = (email) => {
+    // regex email
+    let emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return (emailPattern.test(email.value));
+    };
+
 // show input entries when form submission
 form.onsubmit = () => {
     console.log("prénom", first.value);
     console.log("nom", last.value);
     console.log("email", email.value);
+    closeModal();
         return false;
 };
+
 
 
 

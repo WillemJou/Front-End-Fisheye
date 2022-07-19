@@ -4,7 +4,7 @@
     <link href="css/style.css" rel="stylesheet" type="text/css" />
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="icon" type="image/png" href="assets/icons/fav.png">
     <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
     <title>Fisheye - photographe </title>
   </head>
@@ -17,24 +17,24 @@
             <img src="assets/icons/close.svg" aria-label="Fermer le formulaire de contact" onclick="closeModal()" />
           </div>
         </header>
-        <form id="modal_form" method="get" novalidate>
+        <form id="modal_form" method="get"  >
           <div>
             <label id="prénom" for="prénom">Prénom</label>
-            <input id="input_prénom" autocomplete="off" aria-labelledby="prénom" type="text"  />
+            <input id="input_prénom" autocomplete="off" aria-labelledby="prénom" type="text"  minlength="2" required  />
           </div>
           <div>
             <label id="nom" for="nom">Nom</label>
-            <input id="input_nom" autocomplete="off" aria-labelledby="nom" type="text"  />
+            <input id="input_nom" autocomplete="off" aria-labelledby="nom" type="text" minlength="2" required />
           </div>
           <div>
             <label id="email" for="email">Email</label>
-            <input id="input_email" autocomplete="off" aria-labelledby="email" type="email"  />
+            <input id="input_email" autocomplete="off" aria-labelledby="email" type="email" required  />
           </div>
           <div>
             <label id="message"  for="votre message">Votre message</label>
             <input id="input_message" autocomplete="off" aria-labelledby="message" class="message__input" />
           </div>
-          <button id="send_button" type="submit" onclick="closeModal()" aria-label="Envoyer" class="contact__button">Envoyer</button>
+          <button id="send_button" type="submit" aria-label="Envoyer" class="contact__button">Envoyer</button>
         </form>
       </div>
     </aside>
