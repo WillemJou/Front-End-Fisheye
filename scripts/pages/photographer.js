@@ -3,10 +3,9 @@ const localUrl = '../../data/photographers.json';
 
 async function getPhotographers() {
     const res = await fetch(localUrl);
-    const datas = await res.json()
+    const datas = await res.json();
     return datas; 
 };
-
 
 function displayData(photographers, allMedias) {
     const photographersHeader = document.querySelector(".photographer__header");
@@ -165,6 +164,7 @@ function displayData(photographers, allMedias) {
                         };
                     });    
                 };
+
                 const nextFunction = () => {
                     let nextImg = addUrlToSrc.findIndex(item => item === media); 
                     if (nextImg === addUrlToSrc.length - 1) {
@@ -174,7 +174,6 @@ function displayData(photographers, allMedias) {
                     next.removeEventListener('click', nextFunction, true);
                     prev.removeEventListener('click', prevFunction, true);
                     window.removeEventListener('keydown', arrowEvent);
-                    console.log(nextImg);
                 };   
                 
                 const prevFunction = () => {
@@ -185,9 +184,7 @@ function displayData(photographers, allMedias) {
                     loadData(addUrlToSrc[prevImg - 1]);
                     prev.removeEventListener('click', prevFunction, true);
                     next.removeEventListener('click', nextFunction, true);
-                    window.removeEventListener('keydown', arrowEvent);
-                    console.log(prevImg);
-                    
+                    window.removeEventListener('keydown', arrowEvent);  
                 };    
                 
                 // switch case for arrow prev and next functions
@@ -204,6 +201,7 @@ function displayData(photographers, allMedias) {
                                 return;
                             }
                         };
+                        
                 // navigate and close lightbox event
                 next.addEventListener('click', nextFunction, true); 
                 prev.addEventListener('click', prevFunction, true);
@@ -233,7 +231,6 @@ function displayData(photographers, allMedias) {
     
         // chevron filter
         const selectFilterContainer = document.querySelector("#filter");
-        const pop = document.querySelector(".pop");
         const chevronUp = document.querySelector(".chevron-up");
         const chevronDown = document.querySelector(".chevron-down");
         let open = false;
@@ -277,7 +274,7 @@ function displayData(photographers, allMedias) {
                     break;
                     
                     case 'date':
-                        const dateSort = medias.sort((a, b) => {
+                        medias.sort((a, b) => {
                             if (a.date < b.date) return 1;
                             if (a.date > b.date) return -1;
                             return 0;
