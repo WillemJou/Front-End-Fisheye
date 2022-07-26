@@ -43,6 +43,7 @@
     </header>
     <main id="main" aria-hidden="false">
       <div class="photographer__header">
+        <button id="open_modal_button" class="contact__button" aria-label="Contactez-moi" onclick="displayModal()">Contactez-moi</button>
       </div>
       <label id="filter" class="filters">Trier par
         <div class="filter__container">
@@ -66,13 +67,12 @@
       <aside class="sticky__card" id="sticky_card">
       </aside>
     </main>
-    <button id="open_modal_button" class="contact__button" aria-label="Contactez-moi" onclick="displayModal()">Contactez-moi</button>
   <div class="lightbox" id="lb_display" aria-hidden="true" aria-label="image en vue rapprochée" role="dialog">
     <div class="media__container"></div>
     <button class="lightbox__previous">
-      <img class="prev__chevron" src="assets/images/chevron-prev.png" alt=""></button>
+      <img class="prev__chevron" src="assets/images/chevron-prev.png" alt="image précédente"></button>
       <button class="lightbox__next">
-        <img class="next__chevron" src="assets/images/chevron-next.png" alt=""></button>
+        <img class="next__chevron" src="assets/images/chevron-next.png" alt="image suivante"></button>
         <button class="lightbox__close">
           <img class="lightbox__close-img" alt="croix de fermeture" src="assets/images/close.png"></button>
           

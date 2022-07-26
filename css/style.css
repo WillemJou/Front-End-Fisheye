@@ -125,7 +125,7 @@ select {
    border: none;
    background-color: #901C1C;
    border-radius: 5px;
-   padding: 9px 35px 10px 25px;
+   padding: 9px 39px 10px 15px;
    font-weight: normal;
    color: #FAFAFA;
    cursor: pointer;
@@ -167,8 +167,8 @@ select {
     width: 15px;
     height: 15px;
     position: absolute;
-    top: 10px;
-    left: 104px;
+    top: 9px;
+    left: 89px;
     cursor: pointer;
     pointer-events: none;
 }
@@ -272,12 +272,12 @@ select {
     background: rgba(0, 0, 0, 0.2);
     width: 100%;
     height: 100%;
+    z-index: 2 !important;
 }
 
 .modal {
     width: 50%;
     display:  flex;
-    z-index: 2;
     border-radius: 5px;
     background-color: #DB8876;
     display: flex;
@@ -335,6 +335,9 @@ select {
 .modal header {
     justify-content: space-between;
     width: 100%;
+}
+.relative {
+    position: relative;
 }
 
 .modal header img {
@@ -448,15 +451,6 @@ form input {
          width: 100%;
          height: 88%;
     }
-    #open_modal_button  {
-        padding: 11px;
-        width: 178px;
-        height: 43px;
-        left: 0;
-        bottom: 0;
-        margin-left: 100px;
-        position: sticky;
-    }
 }
 @media screen and (max-width: 630px) {
     .photographer__header a {
@@ -488,15 +482,10 @@ form input {
         display: flex;
         flex-direction: column;
     }
-    #open_modal_button  {
-        left: 100%;
-        bottom: 47px;
-        margin-right: 115px;
-    }
 }
 @media screen and (max-width: 397px) {
     
-    #open_modal_button, .sticky__card {
+    .sticky__card {
         margin: 20px;
    }
 

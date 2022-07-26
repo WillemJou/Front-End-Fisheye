@@ -16,6 +16,7 @@ button.tabIndex = 0 ;
 const first = document.getElementById('input_prénom');
 const last = document.getElementById('input_nom');
 const email = document.getElementById('input_email');
+const message = document.getElementById("input_message");
 
 function displayModal() {
 	contactModal.style.display = "flex";
@@ -53,6 +54,7 @@ form.onsubmit = () => {
     console.log("prénom", first.value);
     console.log("nom", last.value);
     console.log("email", email.value);
+    console.log("message", message.value);
     closeModal();
         return false;
 };

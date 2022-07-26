@@ -48,8 +48,6 @@ function displayData(photographers, allMedias) {
     totalPriceContainer.setAttribute("classe", "total-price__container");
     stickyCard.append(totalPriceContainer);
     
-    
-    
     const generalFunction = () => {
         const likeContainers = document.querySelectorAll(".like__container");
         
