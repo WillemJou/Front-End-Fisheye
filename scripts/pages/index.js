@@ -1,4 +1,4 @@
-
+    
 let localUrl = '../../data/photographers.json';
 
 async function getPhotographers() {

@@ -22,6 +22,7 @@ function displayData(photographers, allMedias) {
         return findPhotographer;
     };
     
+    //photographer display  
     const medias =  allMedias.filter( media => media.photographerId === Number(urlIdParams));
     const photographerModel = photographerFactory(findPhotographer());
     const userCardDOM = photographerModel.getUserCardDOM();
@@ -93,16 +94,22 @@ function displayData(photographers, allMedias) {
         const lightBox = document.getElementById("lb_display");
         const next = document.querySelector(".lightbox__next");
         const prev = document.querySelector(".lightbox__previous");
-        prev.tabIndex = 0; 
-        next.tabIndex = 0;
+        prev.tabIndex = 3; 
+        next.tabIndex = 3;
         const closeLightboxButton = document.querySelector(".lightbox__close");
+        closeLightboxButton.tabIndex = 3;   
         const mediaContainer = document.querySelector(".media__container");
         let srcArray = Array.from(
             imgsAndVids,
-            img => img.getAttribute('src')
-            );
+            img => img.getAttribute('src'));
+            console.log(srcArray);
             let url = window.location.protocol + "//" + window.location.host + "/" ;
             const addUrlToSrc = srcArray.map(src => url + src);
+            const titlesNodeList = document.querySelectorAll(".title__media");
+            let titlesArray = Array.from(
+                titlesNodeList,
+                h3 => h3.textContent);
+                console.log(titlesArray);
             
             const displayLightbox = () => {
                 lightBox.style.display = "flex";
@@ -112,22 +119,20 @@ function displayData(photographers, allMedias) {
                 document.body.style.overflow = "hidden"; 
             };
             
-            
             const loadData = (media, title) => {
                 mediaContainer.innerHTML = ``;
-                media.includes("jpg") ? mediaContainer.innerHTML += `<img id="media_photo" src=${media}>`: mediaContainer.innerHTML += `<video id="media_video" src=${media}>`;
+                media.includes("jpg") ? mediaContainer.innerHTML += `<div class="media-title-container"><img id="media_photo" src=${media}><h3 class="title__media">${title}</h3></div>` : mediaContainer.innerHTML += `<div class="media-title-container"><video id="media_video" src=${media}></video><h3 class="title__media">${title}</h3></div>`;
                 const mediaVideo = document.getElementById("media_video");
                 const mediaPhoto = document.getElementById("media_photo");
+                
                 if (mediaVideo) {
                     mediaVideo.setAttribute("controls", true);
                     mediaVideo.setAttribute("autoplay", true);
-                    mediaVideo.setAttribute("alt", title);
                     mediaVideo.tabIndex = 3;
                     mediaVideo.focus();
                 };
                 if (mediaPhoto) {
                     mediaPhoto.tabIndex = 3;
-                    mediaPhoto.setAttribute("alt", title);
                     mediaPhoto.focus();
                 };     
                 
@@ -164,22 +169,31 @@ function displayData(photographers, allMedias) {
                 };
 
                 const nextFunction = () => {
-                    let nextImg = addUrlToSrc.findIndex(item => item === media); 
+                    let nextImg = addUrlToSrc.findIndex(item => item === media);
+                    let nextTitle = titlesArray.findIndex(item => item === title);
+                    
                     if (nextImg === addUrlToSrc.length - 1) {
                         nextImg = - 1;
                     };
-                    loadData(addUrlToSrc[nextImg + 1]);
+                    if (nextTitle === titlesArray.length - 1) {
+                        nextTitle = - 1;
+                    };
+                    loadData(addUrlToSrc[nextImg + 1], titlesArray[nextTitle + 1]);
                     next.removeEventListener('click', nextFunction, true);
                     prev.removeEventListener('click', prevFunction, true);
                     window.removeEventListener('keydown', arrowEvent);
                 };   
                 
                 const prevFunction = () => {
-                    let prevImg = addUrlToSrc.findIndex(item => item === media); 
+                    let prevImg = addUrlToSrc.findIndex(item => item === media);
+                    let prevTitle = titlesArray.findIndex(item => item === title); 
+                    if (prevTitle === 0) {
+                        prevTitle = titlesArray.length ;
+                    };
                     if (prevImg === 0) {
                         prevImg = addUrlToSrc.length ;
                     };
-                    loadData(addUrlToSrc[prevImg - 1]);
+                    loadData(addUrlToSrc[prevImg - 1], titlesArray[ prevTitle -1]);
                     prev.removeEventListener('click', prevFunction, true);
                     next.removeEventListener('click', nextFunction, true);
                     window.removeEventListener('keydown', arrowEvent);  
@@ -210,8 +224,8 @@ function displayData(photographers, allMedias) {
     
         let displayLightBoxEvents = (e) => {
             [...imgsAndVids].forEach(imgAndVid => {
+                const title = imgAndVid.nextSibling.firstChild.textContent;
                 const media = imgAndVid.src;
-                const title = imgAndVid.alt;
 
                 imgAndVid.addEventListener('click', () => {
                     displayLightbox();

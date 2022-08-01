@@ -33,7 +33,7 @@ function photographerFactory(data) {
         descriptifPhotographer.setAttribute("id", "description_photographer");
         pPrice.textContent = price + textPrice;
         img.setAttribute("src", picture);
-        img.setAttribute("alt", "");
+        img.setAttribute("alt", name);
         a.setAttribute("href", a)
         article.appendChild(a); 
         a.appendChild(img);
@@ -64,6 +64,7 @@ function mediaFactory(data) {
     const short = `assets/SamplePhotos/${video}`;
     const heartPng = `assets/images/heart-solid.png`;
     const titlePhoto = document.createElement("h3");
+    titlePhoto.classList.add("title__media");
     const layoutPhoto = document.createElement("article");
     layoutPhoto.className = 'layout__photo';
     const layoutVideo = document.createElement("article");
@@ -73,9 +74,7 @@ function mediaFactory(data) {
     img.setAttribute("alt", title);
     img.tabIndex = 0;
     const videos = document.createElement("video");
-    videos.className = 'medias';
-    videos.classList.add("videos");
-    videos.setAttribute("alt", title);
+    videos.classList.add("videos", "medias");
     videos.tabIndex = 0;
     const layoutCard = document.createElement("div");
     const heart = document.createElement("img");
